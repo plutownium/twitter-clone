@@ -1,12 +1,12 @@
 <template>
     <div>
         <h4>{{ name }}</h4>
-        <h4>@{{ handle }}</h4>
-        <p> {{ tsp }}</p> <!-- Time Since Posting = tsp -->
-        <p>{{ msg }}</p>
-        <img src='../assets/twit_reply.png'/><p>1</p>
-        <img src="../assets/twit_retweet.png"/><p>2</p>
-        <img src="../assets/twit_fave.png"/><p>3</p>
+        <span>@{{ handle }}</span>
+        <span> {{ tsp }}</span> <!-- Time Since Posting = tsp -->
+        <span>{{ msg }}</span>
+        <img src='../assets/twit_reply.png'/><span>1</span>
+        <img src="../assets/twit_retweet.png"/><span>2</span>
+        <img src="../assets/twit_fave.png"/><span>3</span>
     
     </div>
 </template>
