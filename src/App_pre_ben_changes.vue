@@ -4,9 +4,12 @@
 
 		<TweetDeck @messageFromTweetDeck="tweetDeckMsgReceived"/>
 
-		<TwitterMsg v-for="i, tweet_data in shownTweets" :key="i" 
-		:message="tweet_data.message" :name="tweet_data.name">
-</template>
+		<TwitterMsg name="rolypolyistaken" handle='rolypolyistaken'
+		tsp=50 msg="hey this is a message on twitter"/>
+		<TwitterMsg name="Dominii" handle="Dominii"
+		tsp=36 msg="take it one small step at a time"/>
+		<TwitterMsg name="Rick" handle="hiimrick" tsp=108
+		msg="LFG dire maul"/>
 		
 	</div>
 </template>
@@ -22,23 +25,11 @@ export default {
 		TweetDeck
 	},
 
-	computed: {
-        shownTweets() {
-            return tweets[this.tweet_index]
-        }
-    },
-
 	data: function() {
 		return {
 			tweet: "",
 			message: ""
-		},
-		tweet_index = 0,
-        tweets = [
-             {name: "Roland", handle: "Roly", message: "Ben IS Awesome"},
-             {name: "Dominii", handle: "Dom", message: "Ywep"},
-        ]
-		
+		}
 	},
 
 	methods: {
