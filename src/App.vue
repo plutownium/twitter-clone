@@ -4,13 +4,12 @@
 
 		<TweetDeck v-on:messageFromTweetDeck="msgReceived($event)"/>
 
-		<!-- <ul>
+		<ul>
 			<li v-for="(tweet, index) in tweets" :key="index">{{ tweet }}</li>
-		</ul> -->
+		</ul>
 
-		<TwitterMsg v-for="(tweet, index) in tweets" :key="index" 
-		name="rolypoly" handle="rolypoly" tsp=1 :msg="tweet" />
-		<!-- ask Ben about this error: <TwitterMsg v-for="i, tweet in tweets" :key="i"/ :msg="tweet[i]"> -->
+		<!-- <TwitterMsg v-for="(tweet, index) in tweets" :key="index" 
+		name="rolypoly" handle="rolypoly" tsp=1 :msg="tweet" /> -->
 
 		<TwitterMsg name="rolypolyistaken" handle='rolypolyistaken'
 		tsp=50 msg="hey this is a message on twitter"/>
@@ -48,8 +47,8 @@ export default {
 	},
 
 	methods: {
-		msgReceived(theTweet, name, handle) {
-			this.tweets.push(theTweet, name, handle)
+		msgReceived(theTweet) {
+			this.tweets.push(theTweet)
 		},
 		updateSomeText(newText) {
 			this.placeholderText = newText

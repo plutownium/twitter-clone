@@ -14,9 +14,9 @@
     
     data: function() {
         return {
-            yourName: "rolypolyistaken",
-            yourHandle: "rolypolyistaken",
-            yourTweet: "What's going on?",
+            // yourName: "rolypolyistaken",
+            // yourHandle: "rolypolyistaken",
+            yourTweet: "What's going on?"
             // message: this.yourTweet
         }
     },
