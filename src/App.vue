@@ -36,7 +36,7 @@ export default {
 		tweet_index = 0,
         tweets = [
              {name: "Roland", handle: "Roly", message: "Ben IS Awesome"},
-             {name: "Dominii", handle: "Dom", message: "Ywep"},
+             {name: "Dominii_is_the_best", handle: "Dom", message: "Ywep"},
         ]
 		
 	},
