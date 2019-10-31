@@ -2,7 +2,15 @@
 	<div id="app">
 		<img alt="Vue logo" src="./assets/logo.png">
 
-		<TweetDeck @messageFromTweetDeck="tweetDeckMsgReceived"/>
+		<TweetDeck v-on:messageFromTweetDeck="msgReceived($event)"/>
+
+		<!-- <ul>
+			<li v-for="(tweet, index) in tweets" :key="index">{{ tweet }}</li>
+		</ul> -->
+
+		<TwitterMsg v-for="(tweet, index) in tweets" :key="index" 
+		name="rolypoly" handle="rolypoly" tsp=1 :msg="tweet" />
+		<!-- ask Ben about this error: <TwitterMsg v-for="i, tweet in tweets" :key="i"/ :msg="tweet[i]"> -->
 
 		<TwitterMsg name="rolypolyistaken" handle='rolypolyistaken'
 		tsp=50 msg="hey this is a message on twitter"/>
@@ -12,7 +20,7 @@
 		tsp=108 msg="LFG dire maul"/>
 
 		<advertisement v-on:msgFromAd="updateSomeText($event)"/>
-		
+
 		<input type="text" v-model="placeholderText"/>
 		
 	</div>
@@ -33,15 +41,15 @@ export default {
 
 	data: function() {
 		return {
-			tweet: "",
+			tweets: [],
 			message: "",
 			placeholderText: ""
 		}
 	},
 
 	methods: {
-		tweetDeckMsgReceived() {
-			
+		msgReceived(theTweet, name, handle) {
+			this.tweets.push(theTweet, name, handle)
 		},
 		updateSomeText(newText) {
 			this.placeholderText = newText
