@@ -13,7 +13,7 @@
     
     data: function() {
         return {
-            yourName: "Your name here",
+            yourName: "Name goes here",
             yourHandle: "Your twitter handle",
             yourTweet: "What's going on?"
         }

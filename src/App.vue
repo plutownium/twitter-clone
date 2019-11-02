@@ -5,7 +5,7 @@
 		<TweetDeck v-on:messageFromTweetDeck="msgReceived"/>
 
 		<TwitterMsg v-for="(tweet, index) in tweets" :key="index" 
-		:name="tweet.name" :handle="tweet.handle" tsp=3 :msg="tweet.tweet" />
+		:name="tweet.name" :handle="tweet.handle" tsp=4 :msg="tweet.tweet" />
 
 		<TwitterMsg name="rolypolyistaken" handle='rolypolyistaken'
 		tsp=50 msg="hey this is a message on twitter"/>
