@@ -4,10 +4,6 @@
 
 		<TweetDeck v-on:messageFromTweetDeck="msgReceived"/>
 
-		<!-- <ul>
-			<li v-for="(tweet, index) in tweets" :key="index">{{ tweet }}</li>
-		</ul>-->
-
 		<TwitterMsg v-for="(tweet, index) in tweets" :key="index" 
 		:name="tweet.name" :handle="tweet.handle" tsp=3 :msg="tweet.tweet" />
 
