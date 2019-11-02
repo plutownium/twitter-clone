@@ -2,21 +2,19 @@
 	<div id="app">
 		<img alt="Vue logo" src="./assets/logo.png">
 
-		<TweetDeck v-on:messageFromTweetDeck="msgReceived($event)"/>
+		<TweetDeck v-on:messageFromTweetDeck="msgReceived"/>
 
-		<ul>
+		<!-- <ul>
 			<li v-for="(tweet, index) in tweets" :key="index">{{ tweet }}</li>
-		</ul>
+		</ul>-->
 
-		<!-- <TwitterMsg v-for="(tweet, index) in tweets" :key="index" 
-		name="rolypoly" handle="rolypoly" tsp=1 :msg="tweet" /> -->
+		<TwitterMsg v-for="(tweet, index) in tweets" :key="index" 
+		:name="tweet.name" :handle="tweet.handle" tsp=3 :msg="tweet.tweet" />
 
 		<TwitterMsg name="rolypolyistaken" handle='rolypolyistaken'
 		tsp=50 msg="hey this is a message on twitter"/>
 		<TwitterMsg name="Dominii" handle="Dominii"
 		tsp=36 msg="take it one small step at a time"/>
-		<TwitterMsg name="Rick" handle="hiimrick" 
-		tsp=108 msg="LFG dire maul"/>
 
 		<advertisement v-on:msgFromAd="updateSomeText($event)"/>
 
@@ -47,8 +45,8 @@ export default {
 	},
 
 	methods: {
-		msgReceived(theTweet) {
-			this.tweets.push(theTweet)
+		msgReceived(childData) {
+			this.tweets.push(childData);
 		},
 		updateSomeText(newText) {
 			this.placeholderText = newText
@@ -65,5 +63,12 @@ export default {
 	text-align: center;
 	color: #2c3e50;
 	margin-top: 60px;
+	background-color: darkslategray;
+}
+h4 {
+	color: beige;
+}
+span {
+	color: beige;
 }
 </style>

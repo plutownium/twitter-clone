@@ -1,8 +1,7 @@
 <template>
     <div>
-        <img src=""/> <!-- wanna dynamically render a profile pic -->
-        <!-- <input type='text' v-model="yourName">
-        <input type='text' v-model="yourHandle">-->
+        <input type='text' v-model="yourName">
+        <input type='text' v-model="yourHandle">
         <input type='text' v-model="yourTweet"/>
         <button type='button' @click="sendTweet()">Tweet</button>
     </div>
@@ -14,17 +13,18 @@
     
     data: function() {
         return {
-            // yourName: "rolypolyistaken",
-            // yourHandle: "rolypolyistaken",
+            yourName: "Your name here",
+            yourHandle: "Your twitter handle",
             yourTweet: "What's going on?"
-            // message: this.yourTweet
         }
     },
 
     methods: {
         sendTweet() {
-            // this.$emit('messageFromTweetDeck', this.yourTweet, this.yourName, this.yourHandle);
-            this.$emit('messageFromTweetDeck', this.yourTweet)
+            this.$emit('messageFromTweetDeck', 
+                { tweet: this.yourTweet, name: this.yourName, handle: this.yourHandle }
+                );
+            // this.$emit('messageFromTweetDeck', this.yourTweet)
         }
     }
 }
