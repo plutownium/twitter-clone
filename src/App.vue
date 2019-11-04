@@ -4,17 +4,18 @@
 
 		<TweetDeck v-on:messageFromTweetDeck="msgReceived"/>
 
-		<TwitterMsg v-for="(tweet, index) in tweets" :key="index" 
-		:name="tweet.name" :handle="tweet.handle" tsp=4 :msg="tweet.tweet" />
+		<TwitterMsg v-for="(tweet, index) in $tweets" :key="index" 
+		:name="tweet.name" :handle="tweet.handle" tsp=4 :msg="tweet.tweet" :id='tweet.id' />
 
-		<TwitterMsg name="rolypolyistaken" handle='rolypolyistaken'
+		<!-- <TwitterMsg name="rolypolyistaken" handle='rolypolyistaken'
 		tsp=50 msg="hey this is a message on twitter"/>
 		<TwitterMsg name="Dominii" handle="Dominii"
-		tsp=36 msg="take it one small step at a time"/>
+		tsp=36 msg="take it one small step at a time"/> -->
 
 		<advertisement v-on:msgFromAd="updateSomeText($event)"/>
 
 		<input type="text" v-model="placeholderText"/>
+		<router-view></router-view>
 		
 	</div>
 </template>
@@ -34,7 +35,10 @@ export default {
 
 	data: function() {
 		return {
-			tweets: [],
+			tweets: [
+				{name: 'rolypolyistaken', handle: 'rolypolyistaken', tweet: 'this is a msg on twitter', tsp: 36}, 
+				{name: 'Dominii', handle: 'Dominii', tweet: 'dash sucks', tsp: 50}
+				],
 			message: "",
 			placeholderText: ""
 		}

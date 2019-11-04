@@ -7,6 +7,7 @@
         <img src='../assets/twit_reply.png'/><span>1</span>
         <img src="../assets/twit_retweet.png"/><span>2</span>
         <img src="../assets/twit_fave.png"/><span>3</span>
+        <a :href="link">Tweet's Page</a>
     
     </div>
 </template>
@@ -18,7 +19,13 @@
             name: String,
             handle: String,
             tsp: String,
-            msg: String
+            msg: String,
+            id: Number
+        },
+        computed: {
+            link() {
+                return `http://localhost:8080/#/tweets/${this.id}`
+            }
         }
     }
 </script>
