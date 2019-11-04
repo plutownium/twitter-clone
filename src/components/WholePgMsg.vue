@@ -41,6 +41,11 @@
                 }
             this.tweet = found_tweet 
             }
+        },
+        watch: {
+            "$route" (to, from) {
+                
+            }
         }
     }
 </script>
