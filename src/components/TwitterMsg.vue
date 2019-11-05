@@ -8,6 +8,8 @@
         <img src="../assets/twit_retweet.png"/><span>2</span>
         <img src="../assets/twit_fave.png"/><span>3</span>
         <a :href="link">Tweet's Page</a>
+        <br/>
+        <a href="/">Go to Home</a>
     
     </div>
 </template>

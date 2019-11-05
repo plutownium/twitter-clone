@@ -2,7 +2,9 @@
     <div>
         <p>You made it to the Settings page.</p>
         <a href="/#/messages">Go to Messages</a>
-        <p>Still Settings</p>
+        <br/>
+        <a href="/">Go back to Home</a>
+        <!-- <p>Still Settings</p> -->
     </div>
 </template>
 

@@ -1,36 +1,30 @@
 <template>
 	<div id="app">
-		<img alt="Vue logo" src="./assets/logo.png">
-
+		<!-- <img alt="Vue logo" src="./assets/logo.png">
 		<TweetDeck v-on:messageFromTweetDeck="msgReceived"/>
-
 		<TwitterMsg v-for="(tweet, index) in $tweets" :key="index" 
 		:name="tweet.name" :handle="tweet.handle" :tsp="tweet.tsp" :msg="tweet.tweet" :id='tweet.id' />
-
-		<!-- <TwitterMsg name="rolypolyistaken" handle='rolypolyistaken'
-		tsp=50 msg="hey this is a message on twitter"/>
-		<TwitterMsg name="Dominii" handle="Dominii"
-		tsp=36 msg="take it one small step at a time"/> -->
-
 		<advertisement v-on:msgFromAd="updateSomeText($event)"/>
+		<input type="text" v-model="placeholderText"/> -->
 
-		<input type="text" v-model="placeholderText"/>
 		<router-view></router-view>
+		<a href="/#/messages">Go to your Messages</a>
+		<a href="/#/settings">Go to your Settings</a>
 		
 	</div>
 </template>
 
 <script>
-import TwitterMsg from './components/TwitterMsg.vue'
-import TweetDeck from './components/TweetDeck.vue'
-import Advertisement from './components/Advertisement.vue'
+// import TwitterMsg from './components/TwitterMsg.vue'
+// import TweetDeck from './components/TweetDeck.vue'
+// import Advertisement from './components/Advertisement.vue'
 
 export default {
 	name: 'app',
 	components: {
-		TwitterMsg,
-		TweetDeck,
-		Advertisement
+		// TwitterMsg,
+		// TweetDeck,
+		// Advertisement
 	},
 
 	data: function() {
@@ -64,11 +58,15 @@ export default {
 	color: #2c3e50;
 	margin-top: 60px;
 	background-color: darkslategray;
+	padding: 20px;
 }
 h4 {
 	color: beige;
 }
 span {
 	color: beige;
+}
+a:visited {
+	color:brown;
 }
 </style>

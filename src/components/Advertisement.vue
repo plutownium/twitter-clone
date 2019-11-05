@@ -12,7 +12,7 @@
     
     data: function() {
         return {
-            testingKnowledge: "This is probably wrong"
+            testingKnowledge: "This works as intended"
         }
     },
 
