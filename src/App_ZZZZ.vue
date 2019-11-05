@@ -6,7 +6,6 @@
 
 		<TwitterMsg v-for="i, tweet_data in shownTweets" :key="i" 
 		:message="tweet_data.message" :name="tweet_data.name">
-</template>
 		
 	</div>
 </template>

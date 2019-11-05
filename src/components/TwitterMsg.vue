@@ -18,13 +18,13 @@
         props: {
             name: String,
             handle: String,
-            tsp: String,
+            tsp: Number,
             msg: String,
             id: Number
         },
         computed: {
             link() {
-                return `http://localhost:8080/#/tweets/${this.id}`
+                return `/#/tweets/${this.id}`
             }
         }
     }

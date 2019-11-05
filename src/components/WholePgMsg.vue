@@ -1,50 +1,61 @@
 <template>
     <div>
-        <h4 class="name">{{ name }}</h4>
-        <span class="handle">@{{ handle }}</span>
-        <span> {{ tsp }}</span> <!-- Time Since Posting = tsp -->
-        <span class="msg">{{ msg }}</span>
-        <img src='../assets/twit_reply.png'/><span>1</span>
-        <img src="../assets/twit_retweet.png"/><span>2</span>
-        <img src="../assets/twit_fave.png"/><span>3</span>
-        <p>{{ $route.params.id }}</p>
-        <span>{{ tweet }}</span>
+
+        <twittermsg v-if="tweet" :name="tweet.name" :handle="tweet.handle" :tsp="tweet.tsp" :msg="tweet.tweet"></twittermsg>
+        <!-- <p>{{ $route.params.id }}</p>
+        <span>{{ tweet }}</span> -->
 
     </div>
 </template>
 
 <script>
+import TwitterMsg from './TwitterMsg.vue'
     export default {
         name: "WholePgMsg",
-        props: {
-            name: String,
-            handle: String,
-            tsp: String,
-            msg: String
+        components: {
+            'twittermsg': TwitterMsg
         },
+
         data: function() {
             return {
                 tweet: null
             }
         },
 
-        mounted() {
-            var tweet_id = this.$route.params.id;
-            console.log(tweet_id)
-            var myArray = this.$tweets;
-            console.log(myArray)
-            var arrayLength = myArray.length;
+        methods: {
+            changeTweet(tweet_id) {
+                // var tweet_id = parseInt(this.$route.params.id);
+                // console.log(tweet_id)
+                var myArray = this.$tweets;
+                // console.log(myArray)
+                var arrayLength = myArray.length;
 
-            for (var i = 0; i < arrayLength; i++) {
-                if (myArray[i]["id"] == tweet_id) {
-                    var found_tweet = myArray[i]["tweet"]
+                for (var i = 0; i < arrayLength; i++) { // selects the right tweet
+
+                    // console.log("Tweet Id is: ", tweet_id)
+                    // console.log("here is my array: ", myArray[i]['id'])
+                    if (myArray[i]["id"] == tweet_id) {
+                        console.log("hey: ", myArray[i])
+                        var found_tweet = myArray[i]
+                    } 
+                    console.log("Found Tweet: ", found_tweet)
+                this.tweet = found_tweet // stores the right tweet as this.tweet
                 }
-            this.tweet = found_tweet 
             }
         },
+
+        mounted() {
+            this.changeTweet(parseInt(this.$route.params.id))
+        },
+
         watch: {
-            "$route" (to, from) {
-                
+            "$route" (to) {
+                console.log("In Routewatch")
+                if (to.params.id) {
+                    // this.tweet = this.found_tweet
+                    this.changeTweet(parseInt(this.$route.params.id))
+                    
+                }
             }
         }
     }
