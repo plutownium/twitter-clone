@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h4>{{ name }}</h4>
+        <p>{{ name }}</p>
         <span>@{{ handle }}</span>
         <span> {{ tsp }}</span> <!-- Time Since Posting = tsp -->
         <span>{{ msg }}</span>

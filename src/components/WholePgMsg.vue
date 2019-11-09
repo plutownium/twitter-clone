@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <twittermsg v-if="tweet" :name="tweet.name" :handle="tweet.handle" :tsp="tweet.tsp" :msg="tweet.tweet"></twittermsg>
+        <twittermsg v-if="tweet" :id="tweet.id" :name="tweet.name" :handle="tweet.handle" :tsp="tweet.tsp" :msg="tweet.tweet"></twittermsg>
         <!-- <p>{{ $route.params.id }}</p>
         <span>{{ tweet }}</span> -->
 
@@ -52,7 +52,6 @@ import TwitterMsg from './TwitterMsg.vue'
             "$route" (to) {
                 console.log("In Routewatch")
                 if (to.params.id) {
-                    // this.tweet = this.found_tweet
                     this.changeTweet(parseInt(this.$route.params.id))
                     
                 }

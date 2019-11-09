@@ -57,7 +57,7 @@ export default {
 	text-align: center;
 	color: #2c3e50;
 	margin-top: 60px;
-	background-color: darkslategray;
+	background-color: rgb(38, 47, 47);
 	padding: 20px;
 }
 h4 {
