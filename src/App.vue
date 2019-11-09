@@ -5,15 +5,14 @@
       app
     >
       <v-list dense>
-        <v-list-item link>
+        <v-list-item v-for="(sl, index) in sidebar_links" :key='index' link>
           <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
+            <v-icon>{{ sl.icon }}</v-icon>
           </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>All Tweets</v-list-item-title>
-          </v-list-item-content>
+
+          <router-link :to="sl.to">{{sl.text}}</router-link>
         </v-list-item>
-        <v-list-item link>
+        <!-- <v-list-item link>
           <v-list-item-action>
             <v-icon>mdi-contact-mail</v-icon>
           </v-list-item-action>
@@ -45,7 +44,7 @@
           <v-list-item-content>
             <v-list-item-title>Advertisements</v-list-item-title>
           </v-list-item-content>
-        </v-list-item>
+        </v-list-item> -->
       </v-list>
     </v-navigation-drawer>
 
@@ -81,7 +80,9 @@
       sidebar_links: [
         { to: { name: "Home" }, text: "homepage", icon: "mdi-message-text" },
         { to: { name: "DMs" }, text: "messages", icon: "mdi-message-text" },
-        { to: { name: "Settings" }, text: "settings", icon: "mdi-message-text" }
+        { to: { name: "Settings" }, text: "settings", icon: "mdi-message-text" },
+        { to: { name: "Tweet" }, text: "Send a tweet", icon: "mdi-message-text" }
+        // { to: { name: "SingleTweet" }, text: "Single Tweet", icon: "mdi-message-text" }
       ]
     }),
   }
