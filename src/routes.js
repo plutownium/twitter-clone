@@ -10,4 +10,5 @@ export default [
     { path: '/settings', name: "Settings", component: Settings },
     { path: '/tweet', name: "Tweet", component: TweetDeck },
     { path: '/tweets/:id', name: "SingleTweet", component: WholePgMsg }
+
 ]

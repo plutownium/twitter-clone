@@ -12,6 +12,7 @@
 
           <router-link :to="sl.to">{{sl.text}}</router-link>
         </v-list-item>
+        
         <!-- <v-list-item link>
           <v-list-item-action>
             <v-icon>mdi-contact-mail</v-icon>
@@ -59,6 +60,8 @@
 
     <v-content>
       <router-view></router-view>
+      <v-divider></v-divider>
+      <!-- <advertisement></advertisement> -->
     </v-content>
     <v-footer
       color="indigo"
@@ -70,7 +73,10 @@
 </template>
 
 <script>
+// import Advertisement from './components/Advertisement.vue'
+
   export default {
+    // components: { Advertisement },
     props: {
       source: String,
     },
