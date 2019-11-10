@@ -8,8 +8,6 @@
       :tsp="tweet.tsp"
       :msg="tweet.tweet"
     ></twittermsg>
-    <!-- <p>{{ $route.params.id }}</p>
-    <span>{{ tweet }}</span>-->
   </div>
 </template>
 
@@ -25,7 +23,8 @@ export default {
 
   data: function() {
     return {
-      tweet: null
+      tweet: null,
+      tweet2: this.getTweet()
     };
   },
 
@@ -36,8 +35,9 @@ export default {
   methods: {
     getTweet() {
       // method tests whether I can retrieve a doc named...
-      var doc_id = "4nfzJg2jmVJlt5YrscUQ";
-      var yoink = db.collection("batch_one").doc(doc_id);
+      // var doc_id = "4nfzJg2jmVJlt5YrscUQ";
+      var doc_id2 = "GzKM29EaacuOHWDaj6gV";
+      var yoink = db.collection("batch_one").doc(doc_id2);
 
       yoink
         .get()
