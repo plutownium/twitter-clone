@@ -1,97 +1,123 @@
 <template>
-    <div>
-
-        <twittermsg v-if="tweet" :id="tweet.id" :name="tweet.name" :handle="tweet.handle" :tsp="tweet.tsp" :msg="tweet.tweet"></twittermsg>
-        <!-- <p>{{ $route.params.id }}</p>
-        <span>{{ tweet }}</span> -->
-
-    </div>
+  <div>
+    <twittermsg
+      v-if="tweet"
+      :id="tweet.id"
+      :name="tweet.name"
+      :handle="tweet.handle"
+      :tsp="tweet.tsp"
+      :msg="tweet.tweet"
+    ></twittermsg>
+    <!-- <p>{{ $route.params.id }}</p>
+    <span>{{ tweet }}</span>-->
+  </div>
 </template>
 
 <script>
-import TwitterMsg from './TwitterMsg.vue'
-import { db } from '../db.js'
+import TwitterMsg from "./TwitterMsg.vue";
+import { db } from "../db.js";
 
-    export default {
-        name: "SingleTweet",
-        components: {
-            'twittermsg': TwitterMsg
-        },
+export default {
+  name: "SingleTweet",
+  components: {
+    twittermsg: TwitterMsg
+  },
 
-        data: function() {
-            return {
-                tweet: null
-            }
-        },
+  data: function() {
+    return {
+      tweet: null
+    };
+  },
 
-        firestore: {
-            tweet: db.collection("batch_one"),
-        }
+  firestore: {
+    tweet: db.collection("batch_one")
+  },
 
-        // methods: {
-        //     changeTweet(tweet_id) {
-        //         // var tweet_id = parseInt(this.$route.params.id);
-        //         // console.log(tweet_id)
-        //         var myArray = this.$tweets;
-        //         // console.log(myArray)
-        //         var arrayLength = myArray.length;
+  methods: {
+    getTweet() {
+      // method tests whether I can retrieve a doc named...
+      var doc_id = "4nfzJg2jmVJlt5YrscUQ";
+      var yoink = db.collection("batch_one").doc(doc_id);
 
-        //         for (var i = 0; i < arrayLength; i++) { // selects the right tweet
-
-        //             // console.log("Tweet Id is: ", tweet_id)
-        //             // console.log("here is my array: ", myArray[i]['id'])
-        //             if (myArray[i]["id"] == tweet_id) {
-        //                 console.log("hey: ", myArray[i])
-        //                 var found_tweet = myArray[i]
-        //             } 
-        //             console.log("Found Tweet: ", found_tweet)
-        //         this.tweet = found_tweet // stores the right tweet as this.tweet
-        //         }
-        //     }
-        // },
-
-        // mounted() {
-        //     this.changeTweet(parseInt(this.$route.params.id))
-        // },
-
-        // watch: {
-        //     "$route" (to) {
-        //         console.log("In Routewatch")
-        //         if (to.params.id) {
-        //             this.changeTweet(parseInt(this.$route.params.id))
-                    
-        //         }
-        //     }
-        // }
+      yoink
+        .get()
+        .then(function(doc) {
+          if (doc.exists) {
+            console.log("Document data:", doc.data());
+          } else {
+            console.log("Your method returned no such doc");
+          }
+        })
+        .catch(function(error) {
+          console.log("Something's messed: ", error);
+        });
     }
+  }
+
+  // methods: {
+  //     changeTweet(tweet_id) {
+  //         // var tweet_id = parseInt(this.$route.params.id);
+  //         // console.log(tweet_id)
+  //         var myArray = this.$tweets;
+  //         // console.log(myArray)
+  //         var arrayLength = myArray.length;
+
+  //         for (var i = 0; i < arrayLength; i++) { // selects the right tweet
+
+  //             // console.log("Tweet Id is: ", tweet_id)
+  //             // console.log("here is my array: ", myArray[i]['id'])
+  //             if (myArray[i]["id"] == tweet_id) {
+  //                 console.log("hey: ", myArray[i])
+  //                 var found_tweet = myArray[i]
+  //             }
+  //             console.log("Found Tweet: ", found_tweet)
+  //         this.tweet = found_tweet // stores the right tweet as this.tweet
+  //         }
+  //     }
+  // },
+
+  // mounted() {
+  //     this.changeTweet(parseInt(this.$route.params.id))
+  // },
+
+  // watch: {
+  //     "$route" (to) {
+  //         console.log("In Routewatch")
+  //         if (to.params.id) {
+  //             this.changeTweet(parseInt(this.$route.params.id))
+
+  //         }
+  //     }
+  // }
+};
 </script>
 
 <style>
-    img {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .handle {
-        font: Times New Roman;
-        font-size: 16px;
-        color: OldLace;
-    }
+img {
+  width: 30px;
+  height: 30px;
+}
 
-    .name {
-        font: Helvetica Neue;
-        font-size: 16px;
-        color: OldLace;
-    }
+.handle {
+  font: Times New Roman;
+  font-size: 16px;
+  color: OldLace;
+}
 
-    .msg {
-        font: Helvetica Neue;
-        font-size: 14px;
-        color: Aliceblue;
-    }
+.name {
+  font: Helvetica Neue;
+  font-size: 16px;
+  color: OldLace;
+}
 
-    p {
-        color: aliceblue;
-        font-weight: bold;
-    }
+.msg {
+  font: Helvetica Neue;
+  font-size: 14px;
+  color: Aliceblue;
+}
+
+p {
+  color: aliceblue;
+  font-weight: bold;
+}
 </style>
