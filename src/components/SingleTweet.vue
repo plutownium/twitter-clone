@@ -34,61 +34,14 @@ export default {
 
   methods: {
     getTweet() {
-      // method tests whether I can retrieve a doc named...
-      // var doc_id = "4nfzJg2jmVJlt5YrscUQ";
-      var doc_id2 = "GzKM29EaacuOHWDaj6gV";
-      var yoink = db.collection("batch_one").doc(doc_id2);
+      var doc_id = this.$route.params.id;
+      var yoink = db.collection("batch_one").doc(doc_id);
 
-      yoink
-        .get()
-        .then(function(doc) {
-          if (doc.exists) {
-            console.log("Document data:", doc.data());
-          } else {
-            console.log("Your method returned no such doc");
-          }
-        })
-        .catch(function(error) {
-          console.log("Something's messed: ", error);
-        });
+      yoink.get().then(function(doc) {
+        return doc.data();
+      });
     }
   }
-
-  // methods: {
-  //     changeTweet(tweet_id) {
-  //         // var tweet_id = parseInt(this.$route.params.id);
-  //         // console.log(tweet_id)
-  //         var myArray = this.$tweets;
-  //         // console.log(myArray)
-  //         var arrayLength = myArray.length;
-
-  //         for (var i = 0; i < arrayLength; i++) { // selects the right tweet
-
-  //             // console.log("Tweet Id is: ", tweet_id)
-  //             // console.log("here is my array: ", myArray[i]['id'])
-  //             if (myArray[i]["id"] == tweet_id) {
-  //                 console.log("hey: ", myArray[i])
-  //                 var found_tweet = myArray[i]
-  //             }
-  //             console.log("Found Tweet: ", found_tweet)
-  //         this.tweet = found_tweet // stores the right tweet as this.tweet
-  //         }
-  //     }
-  // },
-
-  // mounted() {
-  //     this.changeTweet(parseInt(this.$route.params.id))
-  // },
-
-  // watch: {
-  //     "$route" (to) {
-  //         console.log("In Routewatch")
-  //         if (to.params.id) {
-  //             this.changeTweet(parseInt(this.$route.params.id))
-
-  //         }
-  //     }
-  // }
 };
 </script>
 
