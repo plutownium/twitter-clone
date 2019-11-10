@@ -8,6 +8,7 @@
       :tsp="tweet.tsp"
       :msg="tweet.tweet"
     ></twittermsg>
+    <p>{{ tweet2 }}</p>
   </div>
 </template>
 
@@ -38,8 +39,18 @@ export default {
       var yoink = db.collection("batch_one").doc(doc_id);
 
       yoink.get().then(function(doc) {
-        return doc.data();
+        console.log(doc.data());
+        var my_data = doc.data();
       });
+    }
+  },
+
+  watch: {
+    $route(to) {
+      console.log("Back in RouteWatch");
+      if (to.params.id) {
+        this.getTweet();
+      }
     }
   }
 };
