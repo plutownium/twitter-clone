@@ -27,7 +27,7 @@ import { db } from '../db'
 
 	data: function() {
 		return {
-			tweets: this.$tweets,
+			tweets: null,
 			placeholderText: ""
 		}
 	},

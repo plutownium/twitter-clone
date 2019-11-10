@@ -24,7 +24,7 @@
       <v-btn text><v-icon>mdi-chat-outline</v-icon>Reply</v-btn>
       <v-btn text><v-icon>mdi-heart</v-icon>Like</v-btn>
       <v-btn text><v-icon>mdi-vector-square</v-icon>Retweet</v-btn>
-      <v-btn text>Button</v-btn>
+      <v-btn text><router-link :to='{ name: "SingleTweet" }'>Button</v-btn>
     </v-card-actions>
   </v-card>
 

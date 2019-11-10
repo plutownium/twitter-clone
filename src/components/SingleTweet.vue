@@ -10,8 +10,10 @@
 
 <script>
 import TwitterMsg from './TwitterMsg.vue'
+import { db } from '../db.js'
+
     export default {
-        name: "WholePgMsg",
+        name: "SingleTweet",
         components: {
             'twittermsg': TwitterMsg
         },
@@ -22,41 +24,45 @@ import TwitterMsg from './TwitterMsg.vue'
             }
         },
 
-        methods: {
-            changeTweet(tweet_id) {
-                // var tweet_id = parseInt(this.$route.params.id);
-                // console.log(tweet_id)
-                var myArray = this.$tweets;
-                // console.log(myArray)
-                var arrayLength = myArray.length;
-
-                for (var i = 0; i < arrayLength; i++) { // selects the right tweet
-
-                    // console.log("Tweet Id is: ", tweet_id)
-                    // console.log("here is my array: ", myArray[i]['id'])
-                    if (myArray[i]["id"] == tweet_id) {
-                        console.log("hey: ", myArray[i])
-                        var found_tweet = myArray[i]
-                    } 
-                    console.log("Found Tweet: ", found_tweet)
-                this.tweet = found_tweet // stores the right tweet as this.tweet
-                }
-            }
-        },
-
-        mounted() {
-            this.changeTweet(parseInt(this.$route.params.id))
-        },
-
-        watch: {
-            "$route" (to) {
-                console.log("In Routewatch")
-                if (to.params.id) {
-                    this.changeTweet(parseInt(this.$route.params.id))
-                    
-                }
-            }
+        firestore: {
+            tweet: db.collection("batch_one"),
         }
+
+        // methods: {
+        //     changeTweet(tweet_id) {
+        //         // var tweet_id = parseInt(this.$route.params.id);
+        //         // console.log(tweet_id)
+        //         var myArray = this.$tweets;
+        //         // console.log(myArray)
+        //         var arrayLength = myArray.length;
+
+        //         for (var i = 0; i < arrayLength; i++) { // selects the right tweet
+
+        //             // console.log("Tweet Id is: ", tweet_id)
+        //             // console.log("here is my array: ", myArray[i]['id'])
+        //             if (myArray[i]["id"] == tweet_id) {
+        //                 console.log("hey: ", myArray[i])
+        //                 var found_tweet = myArray[i]
+        //             } 
+        //             console.log("Found Tweet: ", found_tweet)
+        //         this.tweet = found_tweet // stores the right tweet as this.tweet
+        //         }
+        //     }
+        // },
+
+        // mounted() {
+        //     this.changeTweet(parseInt(this.$route.params.id))
+        // },
+
+        // watch: {
+        //     "$route" (to) {
+        //         console.log("In Routewatch")
+        //         if (to.params.id) {
+        //             this.changeTweet(parseInt(this.$route.params.id))
+                    
+        //         }
+        //     }
+        // }
     }
 </script>
 
