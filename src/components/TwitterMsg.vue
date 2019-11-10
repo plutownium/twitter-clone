@@ -10,7 +10,7 @@
         <div class="overline mb-4">{{ name }}</div>
         <v-list-item-title class="headline mb-1">@{{ handle }}</v-list-item-title>
         <div class="overline mb-4">{{ tsp }}</div>
-        <v-list-item-subtitle>{{ msg }}</v-list-item-subtitle>
+        <v-list-item-subtitle>{{ msg }}{{ message }}</v-list-item-subtitle>
       </v-list-item-content>
 
       <v-list-item-avatar
@@ -51,7 +51,8 @@
             handle: String,
             tsp: Number,
             msg: String,
-            id: Number
+            message: String,
+            id: [String, Number]
         },
         computed: {
             link() {
