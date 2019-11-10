@@ -40,7 +40,7 @@ export default {
 
       yoink.get().then(function(doc) {
         console.log(doc.data());
-        var my_data = doc.data();
+        return doc.data();
       });
     }
   },
