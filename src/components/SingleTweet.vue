@@ -8,7 +8,7 @@
       :tsp="tweet.tsp"
       :msg="tweet.tweet"
     ></twittermsg>
-    <p>{{ tweet2 }}</p>
+    <p>{{ tweet }}</p>
   </div>
 </template>
 
@@ -22,37 +22,48 @@ export default {
     twittermsg: TwitterMsg
   },
 
-  data: function() {
+  data() {
     return {
       tweet: null,
-      tweet2: this.getTweet()
+      id: null
     };
   },
 
-  firestore: {
-    tweet: db.collection("batch_one")
-  },
+  // firestore: {
+  //   tweet: db.collection("batch_one")
+  // },
 
   methods: {
     getTweet() {
       var doc_id = this.$route.params.id;
       var yoink = db.collection("batch_one").doc(doc_id);
+      console.log(this);
 
-      yoink.get().then(function(doc) {
+      yoink.get().then(doc => {
         console.log(doc.data());
-        return doc.data();
+        this.tweet = doc.data();
       });
+
+      // yoink.get().then(function(doc) {
+      //   console.log(doc.data());
+      //   console.log(this);
+      // //   this.tweet = doc.data();
+      // });
     }
   },
 
-  watch: {
-    $route(to) {
-      console.log("Back in RouteWatch");
-      if (to.params.id) {
-        this.getTweet();
-      }
-    }
+  mounted() {
+    this.getTweet();
   }
+
+  // watch: {
+  //   $route(to) {
+  //     console.log("Back in RouteWatch");
+  //     if (to.params.id) {
+  //       this.getTweet();
+  //     }
+  //   }
+  // }
 };
 </script>
 
@@ -81,7 +92,7 @@ img {
 }
 
 p {
-  color: aliceblue;
+  /* color: aliceblue; */
   font-weight: bold;
 }
 </style>

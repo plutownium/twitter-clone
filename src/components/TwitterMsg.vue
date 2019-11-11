@@ -23,27 +23,26 @@
           <v-icon>mdi-vector-square</v-icon>Retweet
         </v-btn>
         <v-btn text>
-          <router-link :to="{ name: 'SingleTweet', params: { id: 1 }}">Bigger</router-link>
+          <router-link v-if="id" :to="{ name: 'SingleTweet', params: { id: id }}">Bigger</router-link>
         </v-btn>
       </v-card-actions>
+      <p>{{ id }}</p>
     </v-card>
-
-    <!-- <p>{{ name }}</p>
-        <span>@{{ handle }}</span>
-        <span> {{ tsp }}</span>
-        <span>{{ msg }}</span>
-        <img src='../assets/twit_reply.png'/><span>1</span>
-        <img src="../assets/twit_retweet.png"/><span>2</span>
-        <img src="../assets/twit_fave.png"/><span>3</span>
-        <a :href="link">Tweet's Page</a>
-        <br/>
-    <a href="/">Go to Home</a>-->
   </div>
 </template>
 
 <script>
+// import { db } from "../db.js";
+
 export default {
   name: "TwitterMsg",
+
+  // data: function() {
+  //   return {
+  //     tweet: null
+  //   };
+  // },
+
   props: {
     name: String,
     handle: String,
@@ -52,11 +51,16 @@ export default {
     message: String,
     id: [String, Number]
   },
+
   computed: {
     link() {
       return `/#/tweets/${this.id}`;
     }
   }
+
+  // firestore: {
+  //   tweet: db.collection("batch_one")
+  // }
 };
 </script>
 
