@@ -8,7 +8,6 @@
       :tsp="tweet.tsp"
       :msg="tweet.tweet"
     ></twittermsg>
-    <p>{{ tweet }}</p>
   </div>
 </template>
 
@@ -77,7 +76,6 @@ img {
 }
 
 p {
-  /* color: aliceblue; */
   font-weight: bold;
 }
 </style>
