@@ -6,7 +6,7 @@
       :name="tweet.name"
       :handle="tweet.handle"
       :tsp="tweet.tsp"
-      :msg="tweet.tweet"
+      :msg="tweet.message"
     ></twittermsg>
   </div>
 </template>
