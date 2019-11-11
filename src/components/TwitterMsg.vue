@@ -37,12 +37,6 @@
 export default {
   name: "TwitterMsg",
 
-  // data: function() {
-  //   return {
-  //     tweet: null
-  //   };
-  // },
-
   props: {
     name: String,
     handle: String,

@@ -43,27 +43,12 @@ export default {
         console.log(doc.data());
         this.tweet = doc.data();
       });
-
-      // yoink.get().then(function(doc) {
-      //   console.log(doc.data());
-      //   console.log(this);
-      // //   this.tweet = doc.data();
-      // });
     }
   },
 
   mounted() {
     this.getTweet();
   }
-
-  // watch: {
-  //   $route(to) {
-  //     console.log("Back in RouteWatch");
-  //     if (to.params.id) {
-  //       this.getTweet();
-  //     }
-  //   }
-  // }
 };
 </script>
 
