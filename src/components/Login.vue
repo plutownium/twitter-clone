@@ -6,9 +6,7 @@
       <br />
       <input type="password" placeholder="Password" v-model="password" />
       <br />
-      <v-btn @click="login">
-        <v-icon>mdi-login</v-icon>Log in
-      </v-btn>
+      <v-btn @click="login"> <v-icon>mdi-login</v-icon>Log in </v-btn>
       <p>
         No account?
         <router-link to="/signup">Create one!</router-link>
