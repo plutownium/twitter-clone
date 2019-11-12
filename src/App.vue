@@ -14,7 +14,7 @@
 
     <v-app-bar app color="indigo" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-toolbar-title>Fake Twitter</v-toolbar-title>
     </v-app-bar>
 
     <v-content>
@@ -41,9 +41,19 @@ export default {
     drawer: null,
     sidebar_links: [
       { to: { name: "Home" }, text: "homepage", icon: "mdi-message-text" },
-      { to: { name: "DMs" }, text: "messages", icon: "mdi-message-text" },
-      { to: { name: "Settings" }, text: "settings", icon: "mdi-message-text" },
-      { to: { name: "Tweet" }, text: "Send a tweet", icon: "mdi-message-text" }
+      { to: { name: "DMs" }, text: "messages", icon: "mdi-access-point" },
+      {
+        to: { name: "Settings" },
+        text: "settings",
+        icon: "mdi-settings-outline"
+      },
+      { to: { name: "Tweet" }, text: "Send a tweet", icon: "mdi-send-outline" },
+      { to: { name: "Login" }, text: "Log In", icon: "mdi-login" },
+      {
+        to: { name: "Signup" },
+        text: "Sign up",
+        icon: "mdi-account-heart-outline"
+      }
     ]
   })
 };

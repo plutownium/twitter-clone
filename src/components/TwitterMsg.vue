@@ -26,7 +26,6 @@
           <router-link v-if="id" :to="{ name: 'SingleTweet', params: { id: id }}">Bigger</router-link>
         </v-btn>
       </v-card-actions>
-      <p>{{ id }}</p>
     </v-card>
   </div>
 </template>
