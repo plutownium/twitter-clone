@@ -31,7 +31,8 @@ const router = new Router({
   ]
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(function(to, from, next) {
+  console.log("1");
   const currentUser = firebase.auth().currentUser;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   // "if the page requires auth and there is no current user, redirect to the login page"
