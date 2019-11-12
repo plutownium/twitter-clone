@@ -7,7 +7,8 @@ import Login from "./components/Login.vue";
 import Signup from "./components/Signup.vue";
 
 import Router from "vue-router";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 import Vue from "vue";
 
@@ -32,7 +33,6 @@ const router = new Router({
 });
 
 router.beforeEach(function(to, from, next) {
-  console.log("1");
   const currentUser = firebase.auth().currentUser;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   // "if the page requires auth and there is no current user, redirect to the login page"

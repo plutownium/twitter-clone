@@ -8,7 +8,4 @@
 </template>
 
 <style scoped>
-p {
-  color: beige;
-}
 </style>
