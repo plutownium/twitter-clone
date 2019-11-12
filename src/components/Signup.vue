@@ -20,7 +20,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 export default {
-  name: "login",
+  name: "signup",
   data() {
     return {
       email: "",
