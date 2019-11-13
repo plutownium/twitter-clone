@@ -1,19 +1,15 @@
 <template>
   <div>
     <h3>Sign out of your account</h3>
-    <v-btn @click="signOut">
-      <v-icon>mdi-door-open</v-icon>Sign Out
-    </v-btn>
-    <p>
-    </p>
+    <v-btn @click="signOut"> <v-icon>mdi-door-open</v-icon>Sign Out </v-btn>
+    <p></p>
     <router-link to="/signup">Sign up.</router-link>
-    <router-link to="/login">Login.</router-link>
+    <router-link to="/login">Log In.</router-link>
   </div>
 </template>
 
 <script>
-// import firebase from "firebase/app";
-// import "firebase/auth";
+import firebase from "firebase";
 
 export default {
   name: "signout",
@@ -21,11 +17,26 @@ export default {
     return {};
   },
   methods: {
-    signOut() {}
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          alert("Logged out!");
+          this.$router.replace({
+            name: "Home"
+          });
+        });
+    }
   }
 };
+//         .then(() => {
+//           this.$router.replace({
+//             name: "Home"
+//           });
+//     }
+//   }
+// };
 </script>
 
-<style>
-
-</style>
+<style></style>
