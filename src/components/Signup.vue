@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Sign up for Fake Twitter</h3>
-    <input v-if="signedIn" type="text" placeholder="Email" v-model="email" />
+    <input type="text" placeholder="Email" v-model="email" />
     <br />
     <input type="password" placeholder="Password" v-model="password" />
     <br />
@@ -38,7 +38,8 @@ export default {
           },
           function(error) {
             alert("Oops" + error.message);
-          }
+          },
+          this.$store.state.commit('setUser', this.email)
         );
     }
   },

@@ -9,6 +9,7 @@
 
           <router-link :to="sl.to">{{sl.text}}</router-link>
         </v-list-item>
+        <v-list-item v-if='username'>Logged in as {{ username }}</v-list-item>
       </v-list>
     </v-navigation-drawer>
 
@@ -48,6 +49,11 @@ export default {
       { to: { name: "Sign up" },text: "Sign up", icon: "mdi-account-heart-outline" },
       { to: { name: "Sign out" }, text: "Sign out", icon: "mdi-door-open" }
     ]
-  })
+  }),
+  computed: {
+    username() {
+      return this.$store.state.user
+    }
+  }
 };
 </script>

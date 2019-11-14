@@ -5,15 +5,25 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    signed_in: true
+    // signed_in: false,
+    user: null,
+    status: null,
   },
-  getters: {},
+  getters: {
+    status(state) {
+      return state.status
+    },
+    user(state) {
+      return state.user
+    }
+  },
   mutations: {
-    changeSignedInStatus(state) {
-      console.log(state.signed_in)
-      const signed_in = !state.signed_in;
-      console.log(state.signed_in)
-      return signed_in;
+    // changeSignedInStatus(state) {}
+    setUser(state, payload) {
+      state.user = payload
+    },
+    removeUser(state) {
+      state.user = null
     }
   }
 });
