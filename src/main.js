@@ -1,9 +1,10 @@
 import Vue from "vue";
 import App from "./App.vue";
 import VueRouter from "vue-router";
-import router from "./routes";
+import router from "./router/routes";
 import vuetify from "./plugins/vuetify";
 import { firestorePlugin } from "vuefire";
+import { store } from "./store/index";
 
 Vue.use(firestorePlugin);
 
@@ -14,7 +15,8 @@ Vue.use(VueRouter);
 new Vue({
   render: h => h(App),
   vuetify,
-  router: router
+  router: router,
+  store: store
 }).$mount("#app");
 
 //   { id: 1, name: 'rolypolyistaken', handle: 'rolypolyistaken', tweet: 'this is a msg on twitter', tsp: 36},

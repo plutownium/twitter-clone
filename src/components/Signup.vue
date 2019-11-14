@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Sign up for Fake Twitter</h3>
-    <input type="text" placeholder="Email" v-model="email" />
+    <input v-if="signedIn" type="text" placeholder="Email" v-model="email" />
     <br />
     <input type="password" placeholder="Password" v-model="password" />
     <br />
@@ -12,6 +12,7 @@
       No account? Create one! Or go to
       <router-link to="/login">login.</router-link>
     </p>
+    <v-btn @click="testFunc">Test button</v-btn>
   </div>
 </template>
 
@@ -40,6 +41,11 @@ export default {
             alert("Oops" + error.message);
           }
         );
+    }
+  },
+  computed: {
+    signedIn() {
+      return this.$store.state.signed_in;
     }
   }
 };

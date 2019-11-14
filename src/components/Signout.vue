@@ -28,6 +28,12 @@ export default {
           });
         });
     }
+  },
+  computed: {
+    toSignOut() {
+      console.log(this.$store.state.signed_in);
+      return this.$store.state.signed_in;
+    }
   }
 };
 //         .then(() => {
