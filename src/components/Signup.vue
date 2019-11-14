@@ -12,7 +12,6 @@
       No account? Create one! Or go to
       <router-link to="/login">login.</router-link>
     </p>
-    <v-btn @click="testFunc">Test button</v-btn>
   </div>
 </template>
 
@@ -48,6 +47,7 @@ export default {
       return this.$store.state.signed_in;
     }
   }
+  
 };
 </script>
 
