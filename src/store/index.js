@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
 	state: {
-		user: null,
+		user: null, // email, basically
 		logged_in: false,
 		name: null,
 		handle: null
@@ -18,7 +18,6 @@ export const store = new Vuex.Store({
 			return state.user;
 		}
 		// getAcctInfo(state) {
-
 		// }
 	},
 	mutations: {
@@ -29,11 +28,20 @@ export const store = new Vuex.Store({
 				state.logged_in = true;
 			}
 		},
-		setUser(state, payload) {
-			state.user = payload;
+		setUser(state, email) {
+			state.user = email;
 		},
-		removeUser(state) {
-			state.user = null;
+		registerUsername(state, username) {
+			state.name = username;
+		},
+		registerHandle(state, handle) {
+			state.handle = handle;
+		},
+		resetForSignout(state) {
+			state.user = null,
+			state.logged_in = false,
+			state.name = null,
+			state.handle = null
 		}
 	}
 });

@@ -43,7 +43,7 @@ export default {
 						alert("Oops" + error.message);
 					}
 				),
-				this.$router.replace("/");
+				this.$router.replace("/pickusername"); // user selects name and handle on next pg
 		}
 	},
 	computed: {

@@ -27,8 +27,7 @@
 		<v-content>
 			<router-view></router-view>
 			<v-divider></v-divider>
-			<!-- <advertisement></advertisement> -->
-			<p>{{ displayState }}</p>
+			<p>Here is your state: {{ displayState }}</p>
 		</v-content>
 		<v-footer color="indigo" app>
 			<span class="white--text">&copy; 2019</span>
@@ -37,10 +36,7 @@
 </template>
 
 <script>
-// import Advertisement from './components/Advertisement.vue'
-
 export default {
-	// components: { Advertisement },
 	props: {
 		source: String
 	},

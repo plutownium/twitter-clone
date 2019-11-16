@@ -32,7 +32,7 @@ const router = new Router({
 		{ path: "/login", name: "Login", component: Login },
 		{ path: "/signup", name: "Sign up", component: Signup },
 		{ path: "/signout", name: "Sign out", component: Signout },
-		{ path: "/pickusername", name: "Select name", component: PickName.vue }
+		{ path: "/pickusername", name: "Select", component: PickName },
 	]
 });
 

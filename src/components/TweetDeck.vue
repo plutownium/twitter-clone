@@ -21,7 +21,7 @@ export default {
 	data: function() {
 		return {
 			yourName: this.$store.state.name,
-			yourHandle: this.$store.state.user,
+			yourHandle: this.$store.state.handle,
 			yourTweet: "What's going on?",
 			testVar: this.getAcctInfo()
 		};
@@ -44,8 +44,12 @@ export default {
 				.doc(userAccountId);
 			firebaseUserInfo.get().then(doc => {
 				console.log("Here is doc.data():", doc.data());
-				this.yourName = doc.data().name;
-				this.yourHandle = doc.data().handle;
+				// doesn't return anything, just updates testVar after testVar fires the method
+				this.testVar = doc.data();
+				// this.yourName = doc.data().name;
+				// this.yourHandle = doc.data().handle;
+				this.$store.commit("registerUsername", doc.data().name);
+				this.$store.commit("registerHandle", doc.data().handle);
 			});
 		}
 	},

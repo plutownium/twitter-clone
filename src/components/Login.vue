@@ -44,7 +44,7 @@ export default {
 						alert("oops! " + error.message);
 					}
 				);
-			this.$router.replace("/"); // should take me back to the homepage ...
+			this.$router.replace("/"); // goes to homepg
 		}
 	}
 };
