@@ -4,7 +4,7 @@
 			<br />
 		<input type="text" placeholder="text" v-model="handle" />
 			<br />
-		<v-btn @click="test">Select Username and Handle</v-btn>
+		<v-btn @click="select">Select Username and Handle</v-btn>
 	</div>
 </template>
 
@@ -15,12 +15,10 @@ export default {
 	data() {
 		return {
 			name: "",
-			handle: "",
-			select: "",
-			test: ""
+			handle: ""
 		};
 	},
-	method: {
+	methods: {
 		test() {
 			console.log("TEST!")
 		},
@@ -28,6 +26,7 @@ export default {
 			this.$store.commit('registerUsername', this.name);
 			this.$store.commit('registerHandle', this.handle);
 			var docname = this.$store.state.user
+			console.log("here is docname: ", docname)
 			db.collection("user_info").doc(docname).set({
 				email: docname,
 				name: this.$store.state.name,

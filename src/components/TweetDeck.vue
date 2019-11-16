@@ -38,7 +38,7 @@ export default {
 		},
 		getAcctInfo() {
 			// returns the account info associated with the user's email
-			var userAccountId = "G6X15WvY8xRdVZ148BDz"; // TODO: instead of hardcoded value, make dynamic
+			var userAccountId = this.$store.state.user; // TODO: instead of hardcoded value, make dynamic
 			var firebaseUserInfo = db
 				.collection("user_info")
 				.doc(userAccountId);

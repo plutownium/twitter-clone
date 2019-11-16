@@ -31,7 +31,7 @@ export default {
 		signUp() {
 			this.$store.commit("setUser", this.email);
 			this.$store.commit("changeSignedInStatus");
-			console.log(this.email);
+			// console.log(this.email);
 			firebase
 				.auth()
 				.createUserWithEmailAndPassword(this.email, this.password)
@@ -43,7 +43,7 @@ export default {
 						alert("Oops" + error.message);
 					}
 				),
-				console.log("can u read this in console?")
+				// console.log("can u read this in console?")
 				this.$router.push("pickusername"); // user selects name and handle on next pg
 		}
 	},
