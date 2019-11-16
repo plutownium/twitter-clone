@@ -2,9 +2,9 @@
 	<div>
 		<input type="text" placeholder="text" v-model="name" />
 			<br />
-		<input type="password" placeholder="text" v-model="handle" />
+		<input type="text" placeholder="text" v-model="handle" />
 			<br />
-		<v-btn @click="selectNameHandle()">Select Username and Handle</v-btn>
+		<v-btn @click="test">Select Username and Handle</v-btn>
 	</div>
 </template>
 
@@ -15,11 +15,16 @@ export default {
 	data() {
 		return {
 			name: "",
-			handle: ""
+			handle: "",
+			select: "",
+			test: ""
 		};
 	},
 	method: {
-		selectNameHandle() {
+		test() {
+			console.log("TEST!")
+		},
+		select() {
 			this.$store.commit('registerUsername', this.name);
 			this.$store.commit('registerHandle', this.handle);
 			var docname = this.$store.state.user
