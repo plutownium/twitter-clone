@@ -14,8 +14,8 @@ import { db } from "../db.js";
 export default {
 	data() {
 		return {
-			name: "",
-			handle: ""
+			name: "username",
+			handle: "handle"
 		};
 	},
 	methods: {

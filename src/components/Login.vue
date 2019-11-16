@@ -18,6 +18,7 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/auth";
+import { db } from "../db.js";
 
 export default {
 	name: "login",
@@ -44,6 +45,17 @@ export default {
 						alert("oops! " + error.message);
 					}
 				);
+
+			var userAccountId = this.$store.state.user;
+			var firebaseUserInfo = db
+				.collection("user_info")
+				.doc(userAccountId);
+			firebaseUserInfo.get().then(doc => {
+				console.log("Here is doc.data():", doc.data());
+				this.$store.commit("registerUsername", doc.data().name);
+				this.$store.commit("registerHandle", doc.data().handle);
+			},
+
 			this.$router.replace("/"); // goes to homepg
 		}
 	}
