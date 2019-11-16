@@ -14,10 +14,10 @@ export const store = new Vuex.Store({
 		},
 		user(state) {
 			return state.user;
-		},
-		showLoggedIn(state) {
-			return state.user ? true : false;
 		}
+		// getAcctInfo(state) {
+
+		// }
 	},
 	mutations: {
 		changeSignedInStatus(state) {

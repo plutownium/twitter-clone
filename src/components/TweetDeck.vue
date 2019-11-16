@@ -1,43 +1,65 @@
 <template>
-  <div>
-    <input type="text" v-model="yourName" />
-    <input type="text" v-model="yourHandle" />
-    <input type="text" v-model="yourTweet" />
-    <v-btn @click="addTweet()">
-      <v-icon>mdi-access-point</v-icon>Tweet
-    </v-btn>
-  </div>
+	<div>
+		<input type="text" v-model="yourName" />
+		<input type="text" v-model="yourHandle" />
+		<input type="text" v-model="yourTweet" />
+		<v-btn @click="addTweet()">
+			<v-icon>mdi-access-point</v-icon>Tweet
+		</v-btn>
+		<v-divider></v-divider>
+		<p>{{ testVar }}</p>
+		<v-divider></v-divider>
+	</div>
 </template>
 
 <script>
 import { db } from "../db.js";
 
 export default {
-  name: "TweetDeck",
+	name: "TweetDeck",
 
-  data: function() {
-    return {
-      yourName: "Name goes here",
-      yourHandle: "Your twitter handle",
-      yourTweet: "What's going on?"
-    };
-  },
+	data: function() {
+		return {
+			yourName: "Name goes here",
+			yourHandle: this.$store.state.user,
+			yourTweet: "What's going on?",
+			testVar: this.getAcctInfo()
+		};
+	},
 
-  methods: {
-    addTweet() {
-      db.collection("batch_one").add({
-        name: this.yourName,
-        handle: this.yourHandle,
-        tsp: 0,
-        message: this.yourTweet
-      });
-    }
-    // DEPRECIATED child-to-parent comms function
-    // sendTweet() {
-    //     this.$emit('messageFromTweetDeck',
-    //         { tweet: this.yourTweet, name: this.yourName, handle: this.yourHandle }
-    //         );
-    //     // this.$emit('messageFromTweetDeck', this.yourTweet)
-  }
+	methods: {
+		addTweet() {
+			db.collection("batch_one").add({
+				name: this.yourName,
+				handle: this.yourHandle,
+				tsp: 0,
+				message: this.yourTweet
+			});
+		},
+		getAcctInfo() {
+			// returns the account info associated with the user's email
+			var userAccountId = "G6X15WvY8xRdVZ148BDz"; // TODO: instead of hardcoded value, make dynamic
+			var firebaseUserInfo = db
+				.collection("user_info")
+				.doc(userAccountId);
+			firebaseUserInfo.get().then(doc => {
+				console.log("Here is doc.data():", doc.data());
+				this.testVar = doc.data();
+			});
+		}
+	},
+	computed: {
+		// getAcctInfo() {
+		// 	// returns the account info associated with the user's email
+		// 	var userAccountId = "G6X15WvY8xRdVZ148BDz"; // TODO: instead of hardcoded value, make dynamic
+		// 	var firebaseUserInfo = db
+		// 		.collection("user_info")
+		// 		.doc(userAccountId);
+		// 	firebaseUserInfo.get().then(doc => {
+		// 		console.log("Here is doc.data():", doc.data());
+		// 		return doc.data();
+		// 	});
+		// }
+	}
 };
 </script>
