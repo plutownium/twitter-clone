@@ -1,18 +1,18 @@
 <template>
-  <div>
-    <h3>Sign up for Fake Twitter</h3>
-    <input type="text" placeholder="Email" v-model="email" />
-    <br />
-    <input type="password" placeholder="Password" v-model="password" />
-    <br />
-    <v-btn @click="signUp">
-      <v-icon>mdi-account-heart-outline</v-icon>sign up
-    </v-btn>
-    <p>
-      No account? Create one! Or go to
-      <router-link to="/login">login.</router-link>
-    </p>
-  </div>
+	<div>
+		<h3>Sign up for Fake Twitter</h3>
+		<input ty holder="Email" v-model="email" />
+		<br />
+		<input type="password" placeholder="Password" v-model="password" />
+		<br />
+		<v-btn @click="signUp">
+			<v-icon>mdi-account-heart-outline</v-icon>sign up
+		</v-btn>
+		<p>
+			No account? Create one! Or go to
+			<router-link to="/login">login.</router-link>
+		</p>
+	</div>
 </template>
 
 <script>
@@ -20,43 +20,45 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 export default {
-  name: "signup",
-  data() {
-    return {
-      email: "",
-      password: ""
-    };
-  },
-  methods: {
-    signUp() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then(
-          function() {
-            alert("Your account has been created!");
-          },
-          function(error) {
-            alert("Oops" + error.message);
-          },
-          this.$store.state.commit('setUser', this.email)
-        );
-    }
-  },
-  computed: {
-    signedIn() {
-      return this.$store.state.signed_in;
-    }
-  }
-  
+	name: "signup",
+	data() {
+		return {
+			email: "",
+			password: ""
+		};
+	},
+	methods: {
+		signUp() {
+			this.$store.commit("setUser", this.email);
+			this.$store.commit("changeSignedInStatus");
+			console.log(this.email);
+			firebase
+				.auth()
+				.createUserWithEmailAndPassword(this.email, this.password)
+				.then(
+					function() {
+						alert("Your account has been created!");
+					},
+					function(error) {
+						alert("Oops" + error.message);
+					}
+				),
+				this.$router.replace("/");
+		}
+	},
+	computed: {
+		signedIn() {
+			return this.$store.state.signed_in;
+		}
+	}
 };
 </script>
 
 <style>
 input {
-  padding: 20px;
+	padding: 20px;
 }
 p {
-  padding: 10px;
+	padding: 10px;
 }
 </style>

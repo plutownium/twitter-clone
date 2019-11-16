@@ -1,18 +1,18 @@
 <template>
-  <div>
-    <v-card>
-      <h3>Log in</h3>
-      <input type="text" placeholder="Email" v-model="email" />
-      <br />
-      <input type="password" placeholder="Password" v-model="password" />
-      <br />
-      <v-btn @click="login"> <v-icon>mdi-login</v-icon>Log in </v-btn>
-      <p>
-        No account?
-        <router-link to="/signup">Create one!</router-link>
-      </p>
-    </v-card>
-  </div>
+	<div>
+		<v-card>
+			<h3>Log in</h3>
+			<input type="text" placeholder="Email" v-model="email" />
+			<br />
+			<input type="password" placeholder="Password" v-model="password" />
+			<br />
+			<v-btn @click="login"> <v-icon>mdi-login</v-icon>Log in </v-btn>
+			<p>
+				No account?
+				<router-link to="/signup">Create one!</router-link>
+			</p>
+		</v-card>
+	</div>
 </template>
 
 <script>
@@ -20,34 +20,38 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 export default {
-  name: "login",
-  data() {
-    return {
-      email: "",
-      password: ""
-    };
-  },
-  methods: {
-    login() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(
-          function() {
-            alert("You are now logged in");
-          },
-          function(error) {
-            alert("oops! " + error.message);
-          }
-        );
-      this.$router.replace("/");
-    }
-  }
+	name: "login",
+	data() {
+		return {
+			email: "",
+			password: ""
+		};
+	},
+	methods: {
+		login() {
+			console.log(this.$store.state.user); // starts as null
+			this.$store.commit("setUser", this.email),
+				this.$store.commit("changeSignedInStatus"),
+				console.log(this.$store.state.user); // changes to the input from this.email
+			firebase
+				.auth()
+				.signInWithEmailAndPassword(this.email, this.password)
+				.then(
+					function() {
+						alert("You are now logged in");
+					},
+					function(error) {
+						alert("oops! " + error.message);
+					}
+				);
+			this.$router.replace("/"); // should take me back to the homepage ...
+		}
+	}
 };
 </script>
 
 <style>
 input {
-  padding: 20px;
+	padding: 20px;
 }
 </style>
