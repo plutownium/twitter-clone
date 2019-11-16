@@ -6,7 +6,9 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
 	state: {
 		user: null,
-		logged_in: false
+		logged_in: false,
+		name: null,
+		handle: null
 	},
 	getters: {
 		loggedIn(state) {

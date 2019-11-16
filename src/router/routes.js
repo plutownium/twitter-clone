@@ -6,6 +6,7 @@ import TweetDeck from "../components/TweetDeck.vue";
 import Login from "../components/Login.vue";
 import Signup from "../components/Signup.vue";
 import Signout from "../components/Signout.vue";
+import PickName from "../components/PickName.vue";
 
 import Router from "vue-router";
 import firebase from "firebase/app";
@@ -30,7 +31,8 @@ const router = new Router({
 		{ path: "/tweets/:id", name: "SingleTweet", component: SingleTweet },
 		{ path: "/login", name: "Login", component: Login },
 		{ path: "/signup", name: "Sign up", component: Signup },
-		{ path: "/signout", name: "Sign out", component: Signout }
+		{ path: "/signout", name: "Sign out", component: Signout },
+		{ path: "/pickusername", name: "Select name", component: PickName.vue }
 	]
 });
 

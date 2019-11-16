@@ -20,7 +20,7 @@ export default {
 
 	data: function() {
 		return {
-			yourName: "Name goes here",
+			yourName: this.$store.state.name,
 			yourHandle: this.$store.state.user,
 			yourTweet: "What's going on?",
 			testVar: this.getAcctInfo()
@@ -44,7 +44,8 @@ export default {
 				.doc(userAccountId);
 			firebaseUserInfo.get().then(doc => {
 				console.log("Here is doc.data():", doc.data());
-				this.testVar = doc.data();
+				this.yourName = doc.data().name;
+				this.yourHandle = doc.data().handle;
 			});
 		}
 	},
