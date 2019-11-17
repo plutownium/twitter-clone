@@ -1,11 +1,41 @@
 <template>
 	<div>
-		<input type="text" v-model="yourName" />
-		<input type="text" v-model="yourHandle" />
-		<input type="text" v-model="yourTweet" />
-		<v-btn @click="addTweet()" :disabled="!isLoggedIn">
-			<v-icon>mdi-access-point</v-icon>Tweet
-		</v-btn>
+		<!-- <input type="text" v-model="yourName" />
+		<input type="text" v-model="yourHandle" /> -->
+		<!-- <input type="text" v-model="yourTweet" /> -->
+		<v-container>
+			<v-row>
+				<v-col cols="6" sm="2">
+					<v-text-field
+						counter="20"
+						label="Regular"
+						v-model="yourName"
+						full-width
+					></v-text-field>
+				</v-col>
+				<v-col cols="6" sm="2">
+					<v-text-field
+						counter="20"
+						label="Regular"
+						v-model="yourHandle"
+						full-width
+					></v-text-field>
+				</v-col>
+				<v-col cols="6" sm="5">
+					<v-text-field
+						counter="140"
+						label="Regular"
+						v-model="yourTweet"
+						full-width
+					></v-text-field>
+					<v-col cols="6" sm="4">
+						<v-btn @click="addTweet()" :disabled="!canTweet">
+							<v-icon>mdi-access-point</v-icon>Tweet
+						</v-btn>
+					</v-col>
+				</v-col>
+			</v-row>
+		</v-container>
 		<v-divider></v-divider>
 	</div>
 </template>
@@ -50,24 +80,43 @@ export default {
 		},
 		showName() {
 			if (this.$store.state.name) {
-				return this.$store.state.name
+				return this.$store.state.name;
 			} else {
 				// this.yourName = "Your name goes here"
-				return "Your name goes here"
+				return "Your name goes here";
 			}
 		},
 		showHandle() {
 			if (this.$store.state.name) {
-				return this.$store.state.handle
+				return this.$store.state.handle;
 			} else {
 				// this.yourHandle = "Your handle goes here"
-				return "Your handle goes here"
+				return "Your handle goes here";
 			}
 		}
 	},
 	computed: {
 		isLoggedIn() {
-			return this.$store.state.logged_in;
+			// return this.$store.state.logged_in;
+			if (this.$store.state.logged_in) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+		isOver140() {
+			if (this.yourTweet.length < 140) {
+				return false;
+			} else {
+				return true;
+			}
+		},
+		canTweet() {
+			if (this.$store.state.logged_in && this.yourTweet.length < 140) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 };

@@ -40,14 +40,13 @@ export default {
 					.then(
 						function() {
 							alert("You are now logged in");
-							// moved from line 65 into line 43 because it makes logical sense to fire here
+							// moved from line 65 into line 43 because it should only happen on successful login
 							// retrieves username and handle from database by email
 							var userAccountId = this.$store.state.user;
 							var firebaseUserInfo = db
 								.collection("user_info")
 								.doc(userAccountId);
 							firebaseUserInfo.get().then(doc => {
-								// console.log("Here is doc.data():", doc.data());
 								this.$store.commit(
 									"registerUsername",
 									doc.data().name

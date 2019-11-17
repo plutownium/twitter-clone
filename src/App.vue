@@ -25,9 +25,9 @@
 		</v-app-bar>
 
 		<v-content>
+			<p>Here is your state: {{ displayState }}</p>
 			<router-view></router-view>
 			<v-divider></v-divider>
-			<p>Here is your state: {{ displayState }}</p>
 		</v-content>
 		<v-footer color="indigo" app>
 			<span class="white--text">&copy; 2019</span>
