@@ -40,22 +40,39 @@ export default {
 					.then(
 						function() {
 							alert("You are now logged in");
+							// moved from line 65 into line 43 because it makes logical sense to fire here
+							// retrieves username and handle from database by email
+							var userAccountId = this.$store.state.user;
+							var firebaseUserInfo = db
+								.collection("user_info")
+								.doc(userAccountId);
+							firebaseUserInfo.get().then(doc => {
+								// console.log("Here is doc.data():", doc.data());
+								this.$store.commit(
+									"registerUsername",
+									doc.data().name
+								);
+								this.$store.commit(
+									"registerHandle",
+									doc.data().handle
+								);
+							});
 						},
 						function(error) {
 							alert("oops! " + error.message);
 						}
 					);
 			// retrieves username and handle from database by email
-			var userAccountId = this.$store.state.user;
-			var firebaseUserInfo = db
-				.collection("user_info")
-				.doc(userAccountId);
-			firebaseUserInfo.get().then(doc => {
-				// console.log("Here is doc.data():", doc.data());
-				this.$store.commit("registerUsername", doc.data().name);
-				this.$store.commit("registerHandle", doc.data().handle);
-			}),
-				this.$router.replace("/"); // goes to homepg
+			// var userAccountId = this.$store.state.user;
+			// var firebaseUserInfo = db
+			// 	.collection("user_info")
+			// 	.doc(userAccountId);
+			// firebaseUserInfo.get().then(doc => {
+			// 	// console.log("Here is doc.data():", doc.data());
+			// 	this.$store.commit("registerUsername", doc.data().name);
+			// 	this.$store.commit("registerHandle", doc.data().handle);
+			// }),
+			this.$router.replace("/"); // goes to homepg
 		}
 	}
 };

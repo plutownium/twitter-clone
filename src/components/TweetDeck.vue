@@ -18,8 +18,8 @@ export default {
 
 	data: function() {
 		return {
-			yourName: this.$store.state.name,
-			yourHandle: this.$store.state.handle,
+			yourName: this.showName(),
+			yourHandle: this.showHandle(),
 			yourTweet: "What's going on?"
 			// testVar: this.getAcctInfo()
 		};
@@ -47,27 +47,28 @@ export default {
 				this.$store.commit("registerUsername", doc.data().name);
 				this.$store.commit("registerHandle", doc.data().handle);
 			});
+		},
+		showName() {
+			if (this.$store.state.name) {
+				return this.$store.state.name
+			} else {
+				// this.yourName = "Your name goes here"
+				return "Your name goes here"
+			}
+		},
+		showHandle() {
+			if (this.$store.state.name) {
+				return this.$store.state.handle
+			} else {
+				// this.yourHandle = "Your handle goes here"
+				return "Your handle goes here"
+			}
 		}
 	},
 	computed: {
 		isLoggedIn() {
 			return this.$store.state.logged_in;
-		},
-		// // doesn't work as expected ... 
-		// showName() {
-		// 	if (this.$store.state.name) {
-		// 		return this.$store.state.name
-		// 	} else {
-		// 		return "Your name goes here"
-		// 	}
-		// },
-		// showHandle() {
-		// 	if (this.$store.state.name) {
-		// 		return this.$store.state.handle
-		// 	} else {
-		// 		return "Your handle goes here"
-		// 	}
-		// }
+		}
 	}
 };
 </script>
