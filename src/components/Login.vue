@@ -17,7 +17,7 @@
 
 <script>
 import firebase from "firebase/app";
-import "firebase/auth";
+// import "firebase/auth";
 import { db } from "../db.js";
 
 export default {
@@ -30,39 +30,38 @@ export default {
 	},
 	methods: {
 		login() {
-			console.log(this.$store.state.user); // starts as null
+			// console.log(this.$store.state.user); // starts as null
 			this.$store.commit("setUser", this.email),
 				this.$store.commit("changeSignedInStatus"),
-				console.log(this.$store.state.user); // changes to the input from this.email
-			firebase
-				.auth()
-				.signInWithEmailAndPassword(this.email, this.password)
-				.then(
-					function() {
-						alert("You are now logged in");
-					},
-					function(error) {
-						alert("oops! " + error.message);
-					}
-				);
-
+				// console.log(this.$store.state.user); // changes to the input from this.email
+				firebase
+					.auth()
+					.signInWithEmailAndPassword(this.email, this.password)
+					.then(
+						function() {
+							alert("You are now logged in");
+						},
+						function(error) {
+							alert("oops! " + error.message);
+						}
+					);
+			// retrieves username and handle from database by email
 			var userAccountId = this.$store.state.user;
 			var firebaseUserInfo = db
 				.collection("user_info")
 				.doc(userAccountId);
 			firebaseUserInfo.get().then(doc => {
-				console.log("Here is doc.data():", doc.data());
+				// console.log("Here is doc.data():", doc.data());
 				this.$store.commit("registerUsername", doc.data().name);
 				this.$store.commit("registerHandle", doc.data().handle);
-			},
-
-			this.$router.replace("/"); // goes to homepg
+			}),
+				this.$router.replace("/"); // goes to homepg
 		}
 	}
 };
 </script>
 
-<style>
+<style scoped>
 input {
 	padding: 20px;
 }

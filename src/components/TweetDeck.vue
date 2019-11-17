@@ -3,7 +3,7 @@
 		<input type="text" v-model="yourName" />
 		<input type="text" v-model="yourHandle" />
 		<input type="text" v-model="yourTweet" />
-		<v-btn @click="addTweet()">
+		<v-btn @click="addTweet()" :disabled="!isLoggedIn">
 			<v-icon>mdi-access-point</v-icon>Tweet
 		</v-btn>
 		<v-divider></v-divider>
@@ -50,16 +50,23 @@ export default {
 		}
 	},
 	computed: {
-		// getAcctInfo() {
-		// 	// returns the account info associated with the user's email
-		// 	var userAccountId = "G6X15WvY8xRdVZ148BDz"; // TODO: instead of hardcoded value, make dynamic
-		// 	var firebaseUserInfo = db
-		// 		.collection("user_info")
-		// 		.doc(userAccountId);
-		// 	firebaseUserInfo.get().then(doc => {
-		// 		console.log("Here is doc.data():", doc.data());
-		// 		return doc.data();
-		// 	});
+		isLoggedIn() {
+			return this.$store.state.logged_in;
+		},
+		// // doesn't work as expected ... 
+		// showName() {
+		// 	if (this.$store.state.name) {
+		// 		return this.$store.state.name
+		// 	} else {
+		// 		return "Your name goes here"
+		// 	}
+		// },
+		// showHandle() {
+		// 	if (this.$store.state.name) {
+		// 		return this.$store.state.handle
+		// 	} else {
+		// 		return "Your handle goes here"
+		// 	}
 		// }
 	}
 };

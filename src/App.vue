@@ -20,7 +20,7 @@
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 			<v-toolbar-title>Fake Twitter </v-toolbar-title>
 			<v-banner single-line
-				>Logged in as: {{ displayState.user }}</v-banner
+				>Logged in as: {{ displayState.handle }}</v-banner
 			>
 		</v-app-bar>
 
