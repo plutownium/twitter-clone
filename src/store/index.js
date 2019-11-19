@@ -42,6 +42,9 @@ export const store = new Vuex.Store({
 			state.logged_in = false,
 			state.name = null,
 			state.handle = null
+		},
+		changeUsername(state, newName) {
+			state.user = newName
 		}
 	}
 });

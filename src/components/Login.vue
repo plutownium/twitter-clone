@@ -30,10 +30,11 @@ export default {
 	},
 	methods: {
 		login() {
-			// console.log(this.$store.state.user); // starts as null
+			var self = this; // https://stackoverflow.com/questions/46335667/vuex-cannot-read-property-store-of-undefined
+			// halfway down the pg at "The typical solution [...] is to create a temporary variable outside the function then use it inside the function"
 			this.$store.commit("setUser", this.email),
 				this.$store.commit("changeSignedInStatus"),
-				// console.log(this.$store.state.user); // changes to the input from this.email
+				// console.log(56);
 				firebase
 					.auth()
 					.signInWithEmailAndPassword(this.email, this.password)
@@ -42,16 +43,16 @@ export default {
 							alert("You are now logged in");
 							// moved from line 65 into line 43 because it should only happen on successful login
 							// retrieves username and handle from database by email
-							var userAccountId = this.$store.state.user;
+							var userAccountId = self.$store.state.user;
 							var firebaseUserInfo = db
 								.collection("user_info")
 								.doc(userAccountId);
 							firebaseUserInfo.get().then(doc => {
-								this.$store.commit(
+								self.$store.commit(
 									"registerUsername",
 									doc.data().name
 								);
-								this.$store.commit(
+								self.$store.commit(
 									"registerHandle",
 									doc.data().handle
 								);
@@ -61,16 +62,6 @@ export default {
 							alert("oops! " + error.message);
 						}
 					);
-			// retrieves username and handle from database by email
-			// var userAccountId = this.$store.state.user;
-			// var firebaseUserInfo = db
-			// 	.collection("user_info")
-			// 	.doc(userAccountId);
-			// firebaseUserInfo.get().then(doc => {
-			// 	// console.log("Here is doc.data():", doc.data());
-			// 	this.$store.commit("registerUsername", doc.data().name);
-			// 	this.$store.commit("registerHandle", doc.data().handle);
-			// }),
 			this.$router.replace("/"); // goes to homepg
 		}
 	}

@@ -83,7 +83,7 @@ export default {
 				return this.$store.state.name;
 			} else {
 				// this.yourName = "Your name goes here"
-				return "Your name goes here";
+				return "Name goes here";
 			}
 		},
 		showHandle() {
@@ -91,7 +91,7 @@ export default {
 				return this.$store.state.handle;
 			} else {
 				// this.yourHandle = "Your handle goes here"
-				return "Your handle goes here";
+				return "Handle goes here";
 			}
 		}
 	},
