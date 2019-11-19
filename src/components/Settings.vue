@@ -6,6 +6,7 @@
 		<input type="text" v-model="name" />
 		<h3>Handle</h3>
 		<input type="text" v-model="handle" />
+		<v-btn @click="changeUserInfo()">Change Info</v-btn>
 
 		<p>Your account's email is: {{ user }}</p>
 		<a href="/#/messages">Go to Messages</a>
@@ -30,13 +31,18 @@ export default {
 		};
 	},
 	methods: {
-		changeUsername(newName) {
-			var oldName = this.$state.store.user;
-			this.$store.commit("changeUsername", newName); // updates state to store new name
+		changeUserInfo() {
+			var oldName = this.$store.state.user;
+			var newName = this.name;
+			var newHandle = this.handle;
+			this.$store.commit("changeUsername", newName);
+			this.$store.commit("changeUserHandle", newHandle); // updates state to store new name
+			console.log(54);
 			db.collection("user_info")
 				.doc(oldName)
 				.set({
-					name: newName
+					name: newName,
+					handle: newHandle
 				})
 				.then(function() {
 					console.log("New name successfully set!");
@@ -46,7 +52,7 @@ export default {
 				});
 		},
 		displayUsername() {
-			return null;
+			return this.$store.state.name;
 		},
 		displayUserHandle() {
 			return this.$store.state.handle;

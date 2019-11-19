@@ -17,8 +17,6 @@ export const store = new Vuex.Store({
 		user(state) {
 			return state.user;
 		}
-		// getAcctInfo(state) {
-		// }
 	},
 	mutations: {
 		changeSignedInStatus(state) {
@@ -29,7 +27,7 @@ export const store = new Vuex.Store({
 			}
 		},
 		setUser(state, email) {
-			state.user = email;
+			state = email;
 		},
 		registerUsername(state, username) {
 			state.name = username;
@@ -44,7 +42,10 @@ export const store = new Vuex.Store({
 			state.handle = null
 		},
 		changeUsername(state, newName) {
-			state.user = newName
+			state.name = newName
+		},
+		changeUserHandle(state, newHandle) {
+			state.handle = newHandle
 		}
 	}
 });
