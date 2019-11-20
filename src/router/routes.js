@@ -9,7 +9,7 @@ import Signout from "../components/Signout.vue";
 import PickName from "../components/PickName.vue";
 
 import Router from "vue-router";
-import firebase from "firebase/app";
+// import firebase from "firebase/app";
 import "firebase/auth";
 
 import Vue from "vue";
@@ -25,33 +25,32 @@ const router = new Router({
 		{
 			path: "/tweet",
 			name: "Tweet",
-			component: TweetDeck,
-			meta: { requiresAuth: true }
+			component: TweetDeck
 		},
 		{ path: "/tweets/:id", name: "SingleTweet", component: SingleTweet },
 		{ path: "/login", name: "Login", component: Login },
 		{ path: "/signup", name: "Sign up", component: Signup },
 		{ path: "/signout", name: "Sign out", component: Signout },
-		{ path: "/pickusername", name: "Select", component: PickName },
+		{ path: "/pickusername", name: "Select", component: PickName }
 	]
 });
 
-router.beforeEach(function(to, from, next) {
-	const currentUser = firebase.auth().currentUser;
-	const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-	// console.log("Here is currentUser: ", currentUser) // returns null
-	// console.log("Here is !currentUser: ", !currentUser) // returns true
-	// console.log("Here is requiresAuth: ", requiresAuth)
-	// console.log(
-	//   "Here is !requiresAuth && currentUser",
-	//   !requiresAuth && currentUser
-	// ); // returns null
-	// "if the page requires auth and there is no current user, redirect to the login page"
-	if (requiresAuth && !currentUser) next("Login");
-	// "if the page doesn't require auth and there is a current user, go to the home page"
-	// else if (!requiresAuth && currentUser) next("Login");
-	// "otherwise, load next page"
-	else next();
-});
+// router.beforeEach(function(to, from, next) {
+// 	const currentUser = firebase.auth().currentUser;
+// 	const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+// 	// console.log("Here is currentUser: ", currentUser) // returns null
+// 	// console.log("Here is !currentUser: ", !currentUser) // returns true
+// 	// console.log("Here is requiresAuth: ", requiresAuth)
+// 	// console.log(
+// 	//   "Here is !requiresAuth && currentUser",
+// 	//   !requiresAuth && currentUser
+// 	// ); // returns null
+// 	// "if the page requires auth and there is no current user, redirect to the login page"
+// 	if (requiresAuth && !currentUser) next("Login");
+// 	// "if the page doesn't require auth and there is a current user, go to the home page"
+// 	// else if (!requiresAuth && currentUser) next("Login");
+// 	// "otherwise, load next page"
+// 	else next();
+// });
 
 export default router;

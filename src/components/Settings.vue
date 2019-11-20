@@ -56,7 +56,8 @@ export default {
 		},
 		displayUserHandle() {
 			return this.$store.state.handle;
-		}
+		},
+		changePassword() {}
 	},
 	computed: {}
 };

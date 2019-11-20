@@ -34,34 +34,39 @@ export default {
 			// halfway down the pg at "The typical solution [...] is to create a temporary variable outside the function then use it inside the function"
 			this.$store.commit("setUser", this.email),
 				this.$store.commit("changeSignedInStatus"),
-				// console.log(56);
-				firebase
-					.auth()
-					.signInWithEmailAndPassword(this.email, this.password)
-					.then(
-						function() {
-							alert("You are now logged in");
-							// moved from line 65 into line 43 because it should only happen on successful login
-							// retrieves username and handle from database by email
-							var userAccountId = self.$store.state.user;
-							var firebaseUserInfo = db
-								.collection("user_info")
-								.doc(userAccountId);
-							firebaseUserInfo.get().then(doc => {
-								self.$store.commit(
-									"registerUsername",
-									doc.data().name
-								);
-								self.$store.commit(
-									"registerHandle",
-									doc.data().handle
-								);
-							});
-						},
-						function(error) {
-							alert("oops! " + error.message);
-						}
-					);
+				console.log(56);
+			firebase
+				.auth()
+				.signInWithEmailAndPassword(this.email, this.password)
+				.then(
+					function() {
+						alert("You are now logged in");
+						// moved from line 65 into line 43 because it should only happen on successful login
+						// retrieves username and handle from database by email
+						console.log(
+							"Here is your variable: ",
+							self.$store.state.user
+						);
+						var userAccountId = self.$store.state.user;
+						var firebaseUserInfo = db
+							.collection("user_info")
+							.doc(userAccountId);
+						console.log(57);
+						firebaseUserInfo.get().then(doc => {
+							self.$store.commit(
+								"registerUsername",
+								doc.data().name
+							);
+							self.$store.commit(
+								"registerHandle",
+								doc.data().handle
+							);
+						});
+					},
+					function(error) {
+						alert("oops! " + error.message);
+					}
+				);
 			this.$router.replace("/"); // goes to homepg
 		}
 	}

@@ -27,7 +27,7 @@ export const store = new Vuex.Store({
 			}
 		},
 		setUser(state, email) {
-			state = email;
+			state.user = email;
 		},
 		registerUsername(state, username) {
 			state.name = username;
@@ -36,16 +36,16 @@ export const store = new Vuex.Store({
 			state.handle = handle;
 		},
 		resetForSignout(state) {
-			state.user = null,
-			state.logged_in = false,
-			state.name = null,
-			state.handle = null
+			(state.user = null),
+				(state.logged_in = false),
+				(state.name = null),
+				(state.handle = null);
 		},
 		changeUsername(state, newName) {
-			state.name = newName
+			state.name = newName;
 		},
 		changeUserHandle(state, newHandle) {
-			state.handle = newHandle
+			state.handle = newHandle;
 		}
 	}
 });
