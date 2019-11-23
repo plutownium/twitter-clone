@@ -72,29 +72,49 @@ export default {
 				.then(docRef => {
 					console.log("Successfully used: ", docRef);
 					tweetId = docRef.id;
+					// pull existing userAccount and list of associated TweetIds from database
+					var firebaseUserAccount = db
+						.collection("user_info")
+						.doc(this.$store.state.userId); // get the user's account from the database
+					firebaseUserAccount
+						.get()
+						.then(function(doc) {
+							if (doc.exists) {
+								console.log(100);
+								// self.$store.commit("editHolder", doc.data());
+								self.updateUserTweets(tweetId, doc.data());
+								// console.log(doc.data())
+							} else {
+								console.log("No such document!");
+							}
+						})
+						.catch(function(error) {
+							console.log("Error getting doc: ", error);
+						});
 				})
 				.catch(),
 				alert("Tweet sent!");
 			console.log("Here is tweetId: ", tweetId);
-			// pull existing userAccount and list of associated TweetIds from database
-			var firebaseUserAccount = db
-				.collection("user_info")
-				.doc(this.$store.state.userId); // get the user's account from the database
-			firebaseUserAccount
-				.get()
-				.then(function(doc) {
-					if (doc.exists) {
-						console.log(100);
-						// self.$store.commit("editHolder", doc.data());
-						self.updateUserTweets(tweetId, doc.data());
-						// console.log(doc.data())
-					} else {
-						console.log("No such document!");
-					}
-				})
-				.catch(function(error) {
-					console.log("Error getting doc: ", error);
-				});
+
+			// // pull existing userAccount and list of associated TweetIds from database
+			// var firebaseUserAccount = db
+			// 	.collection("user_info")
+			// 	.doc(this.$store.state.userId); // get the user's account from the database
+			// firebaseUserAccount
+			// 	.get()
+			// 	.then(function(doc) {
+			// 		if (doc.exists) {
+			// 			console.log(100);
+			// 			// self.$store.commit("editHolder", doc.data());
+			// 			self.updateUserTweets(tweetId, doc.data());
+			// 			// console.log(doc.data())
+			// 		} else {
+			// 			console.log("No such document!");
+			// 		}
+			// 	})
+			// 	.catch(function(error) {
+			// 		console.log("Error getting doc: ", error);
+			// 	});
 			// Promise.all([test1]).then(variable => {
 			// 	console.log("VARIABLE: ", variable);
 			// 	var userData = this.$store.state.holder;
