@@ -56,8 +56,6 @@ export default {
 
 	methods: {
 		addTweet() {
-			// send tweet to database while assigning a tweetId value
-			// var tweetId = (Math.random() * 100000).toFixed(0);
 			var self = this;
 			let tweetId;
 			db
@@ -67,11 +65,11 @@ export default {
 					handle: this.yourHandle,
 					tsp: 0,
 					message: this.yourTweet
-					// tweetId: tweetId
 				})
 				.then(docRef => {
 					console.log("Successfully used: ", docRef);
 					tweetId = docRef.id;
+
 					// pull existing userAccount and list of associated TweetIds from database
 					var firebaseUserAccount = db
 						.collection("user_info")
@@ -81,9 +79,7 @@ export default {
 						.then(function(doc) {
 							if (doc.exists) {
 								console.log(100);
-								// self.$store.commit("editHolder", doc.data());
 								self.updateUserTweets(tweetId, doc.data());
-								// console.log(doc.data())
 							} else {
 								console.log("No such document!");
 							}
@@ -94,39 +90,6 @@ export default {
 				})
 				.catch(),
 				alert("Tweet sent!");
-			console.log("Here is tweetId: ", tweetId);
-
-			// // pull existing userAccount and list of associated TweetIds from database
-			// var firebaseUserAccount = db
-			// 	.collection("user_info")
-			// 	.doc(this.$store.state.userId); // get the user's account from the database
-			// firebaseUserAccount
-			// 	.get()
-			// 	.then(function(doc) {
-			// 		if (doc.exists) {
-			// 			console.log(100);
-			// 			// self.$store.commit("editHolder", doc.data());
-			// 			self.updateUserTweets(tweetId, doc.data());
-			// 			// console.log(doc.data())
-			// 		} else {
-			// 			console.log("No such document!");
-			// 		}
-			// 	})
-			// 	.catch(function(error) {
-			// 		console.log("Error getting doc: ", error);
-			// 	});
-			// Promise.all([test1]).then(variable => {
-			// 	console.log("VARIABLE: ", variable);
-			// 	var userData = this.$store.state.holder;
-			// 	console.log("98. Here is UserData:", userData);
-			// });
-			// // TODO: Solve bug where var userData is set before the above then() [code 100] sends its self.$store.commit("editHolder")
-			// var userData = this.$store.state.holder;
-			// console.log("199. Here is userData.name", userData.name);
-
-			// start adding the new entry with the overwritten TweetIds values.
-			// add to db differently if there is already associated tweetIds or not.
-			// TODO: Add tweetId to associated account in user_info
 		},
 		updateUserTweets(tweetId, userData) {
 			if (userData.tweetIds) {
@@ -139,7 +102,7 @@ export default {
 					.set({
 						name: userData.name,
 						handle: userData.handle,
-						tweetIds: tweetIdsToAdd
+						tweetIds: [tweetIdsToAdd]
 					})
 					.then(function() {
 						console.log("Document successfully written!");

@@ -25,7 +25,7 @@
 		</v-app-bar>
 
 		<v-content>
-			<p>Here is your state: {{ displayState }}</p>
+			<p>For debugging purposes: {{ displayState }}</p>
 			<router-view></router-view>
 			<v-divider></v-divider>
 		</v-content>
