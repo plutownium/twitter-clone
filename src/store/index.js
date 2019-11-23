@@ -8,7 +8,8 @@ export const store = new Vuex.Store({
 		user: null, // email, basically
 		logged_in: false,
 		name: null,
-		handle: null
+		handle: null,
+		holder: null
 	},
 	getters: {
 		loggedIn(state) {
@@ -36,16 +37,19 @@ export const store = new Vuex.Store({
 			state.handle = handle;
 		},
 		resetForSignout(state) {
-			(state.user = null),
-				(state.logged_in = false),
-				(state.name = null),
-				(state.handle = null);
+			state.user = null,
+			state.logged_in = false,
+			state.name = null,
+			state.handle = null
 		},
 		changeUsername(state, newName) {
-			state.name = newName;
+			state.name = newName
 		},
 		changeUserHandle(state, newHandle) {
-			state.handle = newHandle;
+			state.handle = newHandle
+		},
+		editHolder(state, payload) {
+			state.holder = payload
 		}
 	}
 });

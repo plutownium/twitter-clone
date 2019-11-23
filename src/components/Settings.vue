@@ -37,7 +37,7 @@ export default {
 			var newHandle = this.handle;
 			this.$store.commit("changeUsername", newName);
 			this.$store.commit("changeUserHandle", newHandle); // updates state to store new name
-			console.log(54);
+			// console.log(54);
 			db.collection("user_info")
 				.doc(oldName)
 				.set({

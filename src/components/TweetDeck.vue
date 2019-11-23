@@ -51,18 +51,94 @@ export default {
 			yourName: this.showName(),
 			yourHandle: this.showHandle(),
 			yourTweet: "What's going on?"
-			// testVar: this.getAcctInfo()
 		};
 	},
 
 	methods: {
 		addTweet() {
-			db.collection("batch_one").add({
-				name: this.yourName,
-				handle: this.yourHandle,
-				tsp: 0,
-				message: this.yourTweet
-			});
+			// send tweet to database while assigning a tweetId value
+			// var tweetId = (Math.random() * 100000).toFixed(0);
+			db
+				.collection("batch_one")
+				.add({
+					name: this.yourName,
+					handle: this.yourHandle,
+					tsp: 0,
+					message: this.yourTweet
+					// tweetId: tweetId
+				})
+				.then()
+				.catch(),
+				alert("Tweet sent!");
+
+			// pull existing userAccount and list of associated TweetIds from database
+			var firebaseUserAccount = db
+				.collection("user_info")
+				.doc(this.$store.state.user); // get the user's account from the database
+			firebaseUserAccount
+				.get()
+				.then(function(doc) {
+					if (doc.exists) {
+						console.log(100);
+						// self.$store.commit("editHolder", doc.data());
+						this.updateUserTweets(tweetId, doc.data());
+						// console.log(doc.data())
+					} else {
+						console.log("No such document!");
+					}
+				})
+				.catch(function(error) {
+					console.log("Error getting doc: ", error);
+				});
+			// Promise.all([test1]).then(variable => {
+			// 	console.log("VARIABLE: ", variable);
+			// 	var userData = this.$store.state.holder;
+			// 	console.log("98. Here is UserData:", userData);
+			// });
+			// // TODO: Solve bug where var userData is set before the above then() [code 100] sends its self.$store.commit("editHolder")
+			// var userData = this.$store.state.holder;
+			// console.log("199. Here is userData.name", userData.name);
+
+			// start adding the new entry with the overwritten TweetIds values.
+			// add to db differently if there is already associated tweetIds or not.
+			// TODO: Add tweetId to associated account in user_info
+		},
+		updateUserTweets(tweetId, userData) {
+			if (userData.tweetIds) {
+				// RETURNS TRUE IF THERE IS SUCH A KEY
+				// "IF there is already tweetIds associated w/ account..."
+				console.log(200);
+				var tweetIdsToAdd = userData["tweetIds"] + tweetId; // want a list of tweetIds
+				db.collection("user_info")
+					.doc(this.$store.state.user)
+					.set({
+						name: userData.name,
+						handle: userData.handle,
+						tweetIds: tweetIdsToAdd
+					})
+					.then(function() {
+						console.log("Document successfully written!");
+					})
+					.catch(function(error) {
+						console.log("There was a bug: ", error);
+					});
+			} else {
+				// "If there is NOT already tweetIds associated w/ account..."
+				console.log(300);
+				db.collection("user_info")
+					.doc(this.$store.state.user)
+					.set({
+						name: userData.name,
+						handle: userData.handle,
+						tweetIds: [tweetId] // "...then add the ID of the Tweet that was just sent"
+					})
+					.then(function() {
+						console.log("Document successfully written!");
+					})
+					.catch(function(error) {
+						console.log("There was a bug: ", error);
+					});
+			}
 		},
 		getAcctInfo() {
 			// returns the account info associated with the user's email
@@ -78,6 +154,7 @@ export default {
 				this.$store.commit("registerHandle", doc.data().handle);
 			});
 		},
+
 		showName() {
 			if (this.$store.state.name) {
 				return this.$store.state.name;
