@@ -45,9 +45,9 @@ export default {
 							// retrieves username and handle from database by email
 							// console.log(
 							// 	"Here is your variable: ",
-							// 	self.$store.state.user
+							// 	self.$store.state.userId
 							// );
-							var userAccountId = self.$store.state.user;
+							var userAccountId = self.$store.state.userId;
 							var firebaseUserInfo = db
 								.collection("user_info")
 								.doc(userAccountId);

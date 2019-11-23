@@ -22,7 +22,7 @@ import { db } from "../db.js";
 export default {
 	data() {
 		return {
-			user: this.$store.state.user,
+			user: this.$store.state.userId,
 			name: this.displayUsername(),
 			handle: this.displayUserHandle()
 			// Alternatively...
@@ -32,7 +32,7 @@ export default {
 	},
 	methods: {
 		changeUserInfo() {
-			var oldName = this.$store.state.user;
+			var oldName = this.$store.state.userId;
 			var newName = this.name;
 			var newHandle = this.handle;
 			this.$store.commit("changeUsername", newName);

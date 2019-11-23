@@ -46,7 +46,7 @@ export default {
 	}),
 	computed: {
 		username() {
-			return this.$store.state.user;
+			return this.$store.state.userId;
 		},
 		displayState() {
 			return this.$store.state;
@@ -75,7 +75,7 @@ export default {
 				}
 			];
 			// "if signed in"
-			if (this.$store.state.user) {
+			if (this.$store.state.userId) {
 				base_links.push({
 					to: { name: "Sign out" },
 					text: "Sign out",

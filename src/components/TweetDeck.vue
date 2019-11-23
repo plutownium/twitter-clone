@@ -58,6 +58,8 @@ export default {
 		addTweet() {
 			// send tweet to database while assigning a tweetId value
 			// var tweetId = (Math.random() * 100000).toFixed(0);
+			var self = this;
+			let tweetId;
 			db
 				.collection("batch_one")
 				.add({
@@ -67,21 +69,24 @@ export default {
 					message: this.yourTweet
 					// tweetId: tweetId
 				})
-				.then()
+				.then(docRef => {
+					console.log("Successfully used: ", docRef);
+					tweetId = docRef.id;
+				})
 				.catch(),
 				alert("Tweet sent!");
-
+			console.log("Here is tweetId: ", tweetId);
 			// pull existing userAccount and list of associated TweetIds from database
 			var firebaseUserAccount = db
 				.collection("user_info")
-				.doc(this.$store.state.user); // get the user's account from the database
+				.doc(this.$store.state.userId); // get the user's account from the database
 			firebaseUserAccount
 				.get()
 				.then(function(doc) {
 					if (doc.exists) {
 						console.log(100);
 						// self.$store.commit("editHolder", doc.data());
-						this.updateUserTweets(tweetId, doc.data());
+						self.updateUserTweets(tweetId, doc.data());
 						// console.log(doc.data())
 					} else {
 						console.log("No such document!");
@@ -110,7 +115,7 @@ export default {
 				console.log(200);
 				var tweetIdsToAdd = userData["tweetIds"] + tweetId; // want a list of tweetIds
 				db.collection("user_info")
-					.doc(this.$store.state.user)
+					.doc(this.$store.state.userId)
 					.set({
 						name: userData.name,
 						handle: userData.handle,
@@ -126,7 +131,7 @@ export default {
 				// "If there is NOT already tweetIds associated w/ account..."
 				console.log(300);
 				db.collection("user_info")
-					.doc(this.$store.state.user)
+					.doc(this.$store.state.userId)
 					.set({
 						name: userData.name,
 						handle: userData.handle,
@@ -142,7 +147,7 @@ export default {
 		},
 		getAcctInfo() {
 			// returns the account info associated with the user's email
-			var userAccountId = this.$store.state.user;
+			var userAccountId = this.$store.state.userId;
 			var firebaseUserInfo = db
 				.collection("user_info")
 				.doc(userAccountId);
