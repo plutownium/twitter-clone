@@ -1,9 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import createPersistedState from "vuex-persistedstate";
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
+	plugins: [createPersistedState()],
 	state: {
 		userId: null, // email, basically
 		logged_in: false,
@@ -37,16 +40,16 @@ export const store = new Vuex.Store({
 			state.handle = handle;
 		},
 		resetForSignout(state) {
-			state.userId = null,
-			state.logged_in = false,
-			state.name = null,
-			state.handle = null
+			(state.userId = null),
+				(state.logged_in = false),
+				(state.name = null),
+				(state.handle = null);
 		},
 		changeUsername(state, newName) {
-			state.name = newName
+			state.name = newName;
 		},
 		changeUserHandle(state, newHandle) {
-			state.handle = newHandle
+			state.handle = newHandle;
 		}
 		// editHolder(state, payload) {
 		// 	state.holder = payload

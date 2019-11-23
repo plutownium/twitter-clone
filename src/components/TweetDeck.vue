@@ -78,7 +78,11 @@ export default {
 						.get()
 						.then(function(doc) {
 							if (doc.exists) {
-								console.log(100);
+								// console.log(100);
+								console.log(
+									"100. here is doc.data(): ",
+									doc.data()
+								);
 								self.updateUserTweets(tweetId, doc.data());
 							} else {
 								console.log("No such document!");
@@ -95,14 +99,19 @@ export default {
 			if (userData.tweetIds) {
 				// RETURNS TRUE IF THERE IS SUCH A KEY
 				// "IF there is already tweetIds associated w/ account..."
-				console.log(200);
-				var tweetIdsToAdd = userData["tweetIds"] + tweetId; // want a list of tweetIds
+				console.log(
+					"200: Here is userData['tweetIds']: ",
+					userData["tweetIds"]
+				);
+				var tweetIdsToAdd = [userData["tweetIds"]] + "," + tweetId; // want an array of tweetIds
+				console.log("Here is tweetId: ", tweetId);
+				console.log("Here is tweetIdsToAdd: ", tweetIdsToAdd);
 				db.collection("user_info")
 					.doc(this.$store.state.userId)
 					.set({
 						name: userData.name,
 						handle: userData.handle,
-						tweetIds: [tweetIdsToAdd]
+						tweetIds: tweetIdsToAdd
 					})
 					.then(function() {
 						console.log("Document successfully written!");
