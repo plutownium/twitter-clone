@@ -82,13 +82,8 @@ export default {
 		updateSomeText(newText) {
 			this.placeholderText = newText;
 		},
-		sortByAuthor() {
-			// set to "name" for first arg when progressing
-			// TODO: show only tweets made by the Name parameter
-			// this.display_sortByAuthor = true;
-			// return name;
-
-			var retrievedName = "hiimrick"; // string, hardcoded for now
+		sortByAuthor(name) {
+			var retrievedName = name; // string
 			var tweets_list = [];
 			let self = this;
 			db.collection("batch_one")
