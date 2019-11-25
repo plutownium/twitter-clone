@@ -21,7 +21,7 @@
 			</v-list>
 		</v-menu>
 		<!-- TODO: Add "v-if sortByAuthor, else regularDisplay" logic -->
-		<div v-if="display_sortByAuthor">
+		<div v-if="!display_sortByAuthor">
 			<TwitterMsg
 				v-for="(tweet, index) in tweets"
 				:key="index"
@@ -32,7 +32,7 @@
 				:id="tweet.id"
 			/>
 		</div>
-		<div v-if="!display_sortByAuthor">
+		<div v-if="display_sortByAuthor">
 			<TwitterMsg
 				v-for="(tweet, index) in tweets_byAuthorName"
 				:key="index"
@@ -68,7 +68,7 @@ export default {
 		return {
 			tweets: null,
 			placeholderText: "",
-			names: this.getNames(), // TODO: Send data from here to the dropdown menu up above
+			names: this.getNames(),
 			display_sortByAuthor: false,
 			tweets_byAuthorName: this.sortByAuthor(name)
 		};
@@ -83,6 +83,12 @@ export default {
 			this.placeholderText = newText;
 		},
 		sortByAuthor(name) {
+			if (name === "All") {
+				this.display_sortByAuthor = false;
+			} else {
+				this.display_sortByAuthor = true;
+			}
+
 			var retrievedName = name; // string
 			var tweets_list = [];
 			let self = this;
@@ -91,7 +97,6 @@ export default {
 				.get()
 				.then(function(querySnapshot) {
 					querySnapshot.forEach(function(doc) {
-						// doc.data() is never undefined for query doc snapshots
 						console.log(doc.id, " => ", doc.data());
 						tweets_list.push(doc.data());
 					});
@@ -102,9 +107,7 @@ export default {
 				});
 		},
 		getNames() {
-			// TODO: Access Firebase database and pull list of usernames, send it to data()
-			// return ["All", "hiimrick", "Dominii", "rolypolyistaken"];
-			var simpleArray = [];
+			var simpleArray = ["All"];
 			let self = this;
 			db.collection("user_info")
 				.get()
