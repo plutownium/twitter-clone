@@ -14,20 +14,35 @@
 					:key="index"
 					@click="sortByAuthor(name)"
 				>
-					<v-list-item-title>{{ name }}</v-list-item-title>
+					<v-list-item-title @click="sortByAuthor(name)">{{
+						name
+					}}</v-list-item-title>
 				</v-list-item>
 			</v-list>
 		</v-menu>
 		<!-- TODO: Add "v-if sortByAuthor, else regularDisplay" logic -->
-		<TwitterMsg
-			v-for="(tweet, index) in tweets"
-			:key="index"
-			:name="tweet.name"
-			:handle="tweet.handle"
-			:tsp="tweet.tsp"
-			:msg="tweet.message"
-			:id="tweet.id"
-		/>
+		<div v-if="display_sortByAuthor">
+			<TwitterMsg
+				v-for="(tweet, index) in tweets"
+				:key="index"
+				:name="tweet.name"
+				:handle="tweet.handle"
+				:tsp="tweet.tsp"
+				:msg="tweet.message"
+				:id="tweet.id"
+			/>
+		</div>
+		<div v-if="!display_sortByAuthor">
+			<TwitterMsg
+				v-for="(tweet, index) in tweets_byAuthorName"
+				:key="index"
+				:name="tweet.name"
+				:handle="tweet.handle"
+				:tsp="tweet.tsp"
+				:msg="tweet.message"
+				:id="tweet.id"
+			/>
+		</div>
 
 		<advertisement v-on:msgFromAd="updateSomeText($event)" />
 
@@ -55,7 +70,7 @@ export default {
 			placeholderText: "",
 			names: this.getNames(), // TODO: Send data from here to the dropdown menu up above
 			display_sortByAuthor: false,
-			display_authorName: this.sortByAuthor()
+			tweets_byAuthorName: this.sortByAuthor(name)
 		};
 	},
 
@@ -64,37 +79,49 @@ export default {
 	},
 
 	methods: {
-		// msgReceived(childData) {
-		// 	this.tweets.push(childData);
-		// },
-		// note: Above method was previously used to receive info from TweetDeck
 		updateSomeText(newText) {
 			this.placeholderText = newText;
 		},
-		sortByAuthor(name) {
+		sortByAuthor() {
+			// set to "name" for first arg when progressing
 			// TODO: show only tweets made by the Name parameter
-			this.display_sortByAuthor = true;
-			return name;
-		}
-		// getNames() {
+			// this.display_sortByAuthor = true;
+			// return name;
+
+			var retrievedName = "hiimrick"; // string, hardcoded for now
+			var tweets_list = [];
+			let self = this;
+			db.collection("batch_one")
+				.where("handle", "==", retrievedName)
+				.get()
+				.then(function(querySnapshot) {
+					querySnapshot.forEach(function(doc) {
+						// doc.data() is never undefined for query doc snapshots
+						console.log(doc.id, " => ", doc.data());
+						tweets_list.push(doc.data());
+					});
+					self.tweets_byAuthorName = tweets_list;
+				})
+				.catch(function(error) {
+					console.log("Error getting documents: ", error);
+				});
+		},
+		getNames() {
 			// TODO: Access Firebase database and pull list of usernames, send it to data()
 			// return ["All", "hiimrick", "Dominii", "rolypolyistaken"];
-		}
-	},
-	computed: {
-		getNames() {
 			var simpleArray = [];
+			let self = this;
 			db.collection("user_info")
 				.get()
 				.then(function(querySnapshot) {
 					querySnapshot.forEach(function(doc) {
 						// console.log(doc.id, " => ", doc.data());
-						simpleArray.push(doc.id);
+						simpleArray.push(doc.data().handle);
 					});
 					console.log("Inside then simpleArray: ", simpleArray);
-					return simpleArray;
+					self.names = simpleArray;
+					// return simpleArray;
 				});
-			// console.log("Testing: ", simpleArray);
 		}
 	}
 };
