@@ -56,8 +56,8 @@ export default {
 
 	methods: {
 		addTweet() {
-			// send tweet to database while assigning a tweetId value
-			// var tweetId = (Math.random() * 100000).toFixed(0);
+			var self = this;
+			let tweetId;
 			db
 				.collection("batch_one")
 				.add({
@@ -65,52 +65,49 @@ export default {
 					handle: this.yourHandle,
 					tsp: 0,
 					message: this.yourTweet
-					// tweetId: tweetId
 				})
-				.then()
+				.then(docRef => {
+					console.log("Successfully used: ", docRef);
+					tweetId = docRef.id;
+
+					// pull existing userAccount and list of associated TweetIds from database
+					var firebaseUserAccount = db
+						.collection("user_info")
+						.doc(this.$store.state.userId); // get the user's account from the database
+					firebaseUserAccount
+						.get()
+						.then(function(doc) {
+							if (doc.exists) {
+								// console.log(100);
+								console.log(
+									"100. here is doc.data(): ",
+									doc.data()
+								);
+								self.updateUserTweets(tweetId, doc.data());
+							} else {
+								console.log("No such document!");
+							}
+						})
+						.catch(function(error) {
+							console.log("Error getting doc: ", error);
+						});
+				})
 				.catch(),
 				alert("Tweet sent!");
-
-			// pull existing userAccount and list of associated TweetIds from database
-			var firebaseUserAccount = db
-				.collection("user_info")
-				.doc(this.$store.state.user); // get the user's account from the database
-			firebaseUserAccount
-				.get()
-				.then(function(doc) {
-					if (doc.exists) {
-						console.log(100);
-						// self.$store.commit("editHolder", doc.data());
-						this.updateUserTweets(tweetId, doc.data());
-						// console.log(doc.data())
-					} else {
-						console.log("No such document!");
-					}
-				})
-				.catch(function(error) {
-					console.log("Error getting doc: ", error);
-				});
-			// Promise.all([test1]).then(variable => {
-			// 	console.log("VARIABLE: ", variable);
-			// 	var userData = this.$store.state.holder;
-			// 	console.log("98. Here is UserData:", userData);
-			// });
-			// // TODO: Solve bug where var userData is set before the above then() [code 100] sends its self.$store.commit("editHolder")
-			// var userData = this.$store.state.holder;
-			// console.log("199. Here is userData.name", userData.name);
-
-			// start adding the new entry with the overwritten TweetIds values.
-			// add to db differently if there is already associated tweetIds or not.
-			// TODO: Add tweetId to associated account in user_info
 		},
 		updateUserTweets(tweetId, userData) {
 			if (userData.tweetIds) {
 				// RETURNS TRUE IF THERE IS SUCH A KEY
 				// "IF there is already tweetIds associated w/ account..."
-				console.log(200);
-				var tweetIdsToAdd = userData["tweetIds"] + tweetId; // want a list of tweetIds
+				console.log(
+					"200: Here is userData['tweetIds']: ",
+					userData["tweetIds"]
+				);
+				var tweetIdsToAdd = [userData["tweetIds"]] + "," + tweetId; // want an array of tweetIds
+				console.log("Here is tweetId: ", tweetId);
+				console.log("Here is tweetIdsToAdd: ", tweetIdsToAdd);
 				db.collection("user_info")
-					.doc(this.$store.state.user)
+					.doc(this.$store.state.userId)
 					.set({
 						name: userData.name,
 						handle: userData.handle,
@@ -126,7 +123,7 @@ export default {
 				// "If there is NOT already tweetIds associated w/ account..."
 				console.log(300);
 				db.collection("user_info")
-					.doc(this.$store.state.user)
+					.doc(this.$store.state.userId)
 					.set({
 						name: userData.name,
 						handle: userData.handle,
@@ -142,7 +139,7 @@ export default {
 		},
 		getAcctInfo() {
 			// returns the account info associated with the user's email
-			var userAccountId = this.$store.state.user;
+			var userAccountId = this.$store.state.userId;
 			var firebaseUserInfo = db
 				.collection("user_info")
 				.doc(userAccountId);
