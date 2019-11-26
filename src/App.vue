@@ -25,7 +25,7 @@
 		</v-app-bar>
 
 		<v-content>
-			<p>Here is your state: {{ displayState }}</p>
+			<p>For debugging purposes: {{ displayState }}</p>
 			<router-view></router-view>
 			<v-divider></v-divider>
 		</v-content>
@@ -46,7 +46,7 @@ export default {
 	}),
 	computed: {
 		username() {
-			return this.$store.state.user;
+			return this.$store.state.userId;
 		},
 		displayState() {
 			return this.$store.state;
@@ -75,7 +75,7 @@ export default {
 				}
 			];
 			// "if signed in"
-			if (this.$store.state.user) {
+			if (this.$store.state.userId) {
 				base_links.push({
 					to: { name: "Sign out" },
 					text: "Sign out",

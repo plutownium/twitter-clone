@@ -25,7 +25,7 @@ export default {
 		select() {
 			this.$store.commit('registerUsername', this.name);
 			this.$store.commit('registerHandle', this.handle);
-			var docname = this.$store.state.user
+			var docname = this.$store.state.userId
 			console.log("here is docname: ", docname)
 			db.collection("user_info").doc(docname).set({
 				email: docname,
