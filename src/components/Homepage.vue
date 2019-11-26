@@ -2,10 +2,10 @@
 	<div>
 		<TweetDeck></TweetDeck>
 
-		<v-menu offset-y>
+		<v-menu open-on-hover offset-y>
 			<template v-slot:activator="{ on }">
 				<v-btn color="primary" dark v-on="on">
-					Dropdown
+					Filter by User
 				</v-btn>
 			</template>
 			<v-list>
@@ -20,7 +20,6 @@
 				</v-list-item>
 			</v-list>
 		</v-menu>
-		<!-- TODO: Add "v-if sortByAuthor, else regularDisplay" logic -->
 		<div v-if="!display_sortByAuthor">
 			<TwitterMsg
 				v-for="(tweet, index) in tweets"
@@ -113,12 +112,10 @@ export default {
 				.get()
 				.then(function(querySnapshot) {
 					querySnapshot.forEach(function(doc) {
-						// console.log(doc.id, " => ", doc.data());
 						simpleArray.push(doc.data().handle);
 					});
-					console.log("Inside then simpleArray: ", simpleArray);
+					// console.log("Inside then simpleArray: ", simpleArray);
 					self.names = simpleArray;
-					// return simpleArray;
 				});
 		}
 	}
